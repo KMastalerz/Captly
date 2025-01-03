@@ -101,15 +101,33 @@ internal class SubtitlesView: BaseViewModel
         get => subtitles.LastTranslatedID;
         set => SetSubProperty(subtitles, s => s.LastTranslatedID, (s, v) => s.LastTranslatedID = v, value);
     }
+    public SubtitlesSetup? SubtitlesSetup
+    {
+        get => subtitles.SubtitlesSetup;
+        set => SetSubProperty(subtitles, s => s.SubtitlesSetup, (s, v) => s.SubtitlesSetup = v, value);
+    }
     public CancellationToken TranslationToken => translationCancellationTokenSource.Token;
-
 
     public async Task StartElapsedTimeTracking()
     {
+        // Parse the initial time from ElapsedTime, if available
+        TimeSpan initialTime = TimeSpan.Zero;
+
+        if (TimeSpan.TryParseExact(ElapsedTime, @"hh\:mm\:ss", null, out TimeSpan parsedTime))
+        {
+            initialTime = parsedTime;
+        }
+
+        // Start the stopwatch
         stopwatch.Start();
+
+        // Start the stopwatch loop
         while (!stopwatchCancellationTokenSource.Token.IsCancellationRequested)
         {
-            ElapsedTime = stopwatch.Elapsed.ToString(@"hh\:mm\:ss");
+            // Combine initial time with the stopwatch's elapsed time
+            TimeSpan currentElapsedTime = initialTime + stopwatch.Elapsed;
+            ElapsedTime = currentElapsedTime.ToString(@"hh\:mm\:ss");
+
             await Task.Delay(1000); // Update every second
         }
     }

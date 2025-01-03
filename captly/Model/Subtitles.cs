@@ -20,4 +20,5 @@ internal class Subtitles
     public double Progress { get; set; } = default!;
     public string ElapsedTime { get; set; } = default!;
     public string Error { get; set; } = default!;
+    public SubtitlesSetup? SubtitlesSetup { get; set; } = null;
 }

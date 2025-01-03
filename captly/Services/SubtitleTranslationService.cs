@@ -1,36 +1,117 @@
-﻿using captly.Interfaces;
+﻿using captly.Enums;
+using captly.Exceptions;
+using captly.Extensions;
+using captly.Interfaces;
 using captly.Model;
+using Newtonsoft.Json;
+using OpenAI.Chat;
+using System.IO;
+using System.Text;
 
 namespace captly.Services;
-internal class SubtitleTranslationService(IApplicationCacheStateService applicationCacheStateService)
+internal class SubtitleTranslationService(IApplicationCacheStateService applicationCacheStateService, IApplicationConfigurationService applicationConfigurationService) : ISubtitleTranslationService
 {
     public async Task StartTranslation(SubtitlesView subtitlesView)
     {
-        var subtitleCache = applicationCacheStateService.OpenedSubtitles.FirstOrDefault(s => s.Name == subtitlesView.Name && s.Language == subtitlesView.Language);
-        // check state of translation 
-        
+        try
+        {
+            var subtitlesCache = applicationCacheStateService.OpenedSubtitles.FirstOrDefault(s => s.Name == subtitlesView.Name && s.Language == subtitlesView.Language);
 
-        // get setup for translation from cache
+            // check state of translation 
+            var initialID = subtitlesCache?.LastTranslatedID ?? 0;
 
-        // read current file cache
+            // get setup for translation from cache
+            var streamReader = new StreamReader(subtitlesView.Path, subtitlesView.Encoding);
+            var subtitles = streamReader.SrtToList();
 
-        // set state to translating
+            var subtitlesLength = subtitles.Count;
 
-        // start | re-start translation clock
+            // remove id's already translated 
+            subtitles = subtitles.Where(s => s.Index <= initialID).ToList();
 
-        // stream file 
+            // set state to translating
+            await subtitlesView.UpdateStatus(TranslationStatus.Translating);
 
-        // exclude already translated ID's if exist and setup is set to continue from last translation
+            // start | re-start translation clock
+            _ = subtitlesView.StartElapsedTimeTracking();
 
-        // loop through each subtitle with step 15 to request for translation, bit by bit.
+            // read current file config
 
-        // after each request, save progress to cache
+            // create new communication chat and history
+            var client = new ChatClient(
+                model: applicationConfigurationService.ApplicationConfiguration.OpenAiApiModel, 
+                apiKey: applicationConfigurationService.ApplicationConfiguration.OpenAiApiKey);
+            var conversationHistory = new List<ChatMessage>();
 
-        // if paused, stop translation clock and set state to paused
+            // loop through each subtitle with step 15 to request for translation, bit by bit.
+            const int chunkSize = 15;
 
-        // if error, stop translation clock, set state to error and throw translation error
+            // read translation prompt
+            var translationPrompt = applicationConfigurationService.TranslationPrompt.Replace("{@Language}", subtitlesView.Language);
 
-        // if completed, stop translation clock, set state to completed and save translation to cache
+            for (int i = 0; i < subtitles.Count(); i += chunkSize)
+            {
+                var generatedSubtitles = new List<Subtitle>();
+                // after each request, save progress to cache
+                var jsonToTranslate = JsonConvert.SerializeObject(subtitles.Skip(i).Take(chunkSize));
+
+                conversationHistory.Add(new UserChatMessage($"{translationPrompt}\n{jsonToTranslate}"));
+
+                bool success = false;
+                int retryCount = 0;
+
+                while (!success && retryCount < 5) // Retry logic for each chunk
+                {
+                    await subtitlesView.UpdateRequestCount();
+
+                    ChatCompletion completion = await client.CompleteChatAsync(conversationHistory.TakeLast(3), cancellationToken: subtitlesView.TranslationToken);
+
+                    await subtitlesView.UpdateInputTokenCount(subtitlesView.InputTokenCount += completion.Usage.InputTokenCount);
+                    await subtitlesView.UpdateOutputTokenCount(subtitlesView.OutputTokenCount += completion.Usage.OutputTokenCount);
+
+                    var response = completion.Content[0].Text.ExtrapolateJson() ??
+                        throw new EmptyJsonException();
+
+                    response = response.Trim();
+
+                    conversationHistory.Add(new AssistantChatMessage(response));
+
+                    generatedSubtitles = JsonConvert.DeserializeObject<List<Subtitle>>(response);
+                }
+
+                if (success)
+                {
+                    var currentMaxID = generatedSubtitles!.Select(s => s.Index).Max()!;
+                    var progress = (double)currentMaxID / subtitlesLength * 100;
+                    await subtitlesView.UpdateProgress(progress);
+
+                    subtitlesView.LastTranslatedID = currentMaxID; // Update last translated ID, so that progress can be cached
+
+
+                    // save translated file
+
+
+                    // update cache
+                }
+                else
+                {
+                    // update cache 
+                }
+            }
+
+
+
+            // if paused, stop translation clock and set state to paused
+
+            // if error, stop translation clock, set state to error and throw translation error
+
+            // if completed, stop translation clock, set state to completed and save translation to cache
+        }
+        catch
+        {
+
+        }
+
     }
 
     public async Task PauseTranslation()

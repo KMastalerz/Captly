@@ -4,19 +4,19 @@ using captly.Views;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.IO;
-using SW = System.Windows;
+using System.Windows;
 
 namespace captly;
 /// <summary>
 /// Interaction logic for App.xaml
 /// </summary>
-public partial class App : SW.Application
+public partial class App : Application
 {
     // Define the ServiceProvider for dependency injection
     public static IServiceProvider ServiceProvider { get; private set; } = default!;
     public static IConfiguration Configuration { get; private set; } = default!;
 
-    protected override void OnStartup(SW.StartupEventArgs e)
+    protected override void OnStartup(StartupEventArgs e)
     {
         // Initialize the dependency injection container
         var services = new ServiceCollection();
@@ -26,6 +26,9 @@ public partial class App : SW.Application
             .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
 
         Configuration = builder.Build();
+
+        //register configuration
+        services.AddSingleton(Configuration);
 
         ConfigureServices(services);
         ConfigureViewModels(services);
@@ -38,30 +41,10 @@ public partial class App : SW.Application
 
     private void ConfigureServices(ServiceCollection services)
     {
-
-        // Register HttpClient with the API base address from appsettings
-        //services.AddTransient<AuthenticatedHttpClientHandler>();
-        //services.AddHttpClient("ApiClient", client =>
-        //{
-        //    var apiBaseAddress = Configuration.GetValue<string>("ApiBaseAddress");
-        //    if (!string.IsNullOrEmpty(apiBaseAddress))
-        //        client.BaseAddress = new Uri(apiBaseAddress);
-        //}).AddHttpMessageHandler<AuthenticatedHttpClientHandler>();
-
-        //services.AddHttpClient("ApiBaseClient", client =>
-        //{
-        //    var apiBaseAddress = Configuration.GetValue<string>("ApiBaseAddress");
-        //    if (!string.IsNullOrEmpty(apiBaseAddress))
-        //        client.BaseAddress = new Uri(apiBaseAddress);
-        //});
-
+        services.AddSingleton<IApplicationCacheStateService, ApplicationCacheStateService>();
+        services.AddSingleton<IApplicationConfigurationService, ApplicationConfigurationService>();
         services.AddTransient<ISubtitleTranslationService, SubtitleTranslationService>();
-        services.AddTransient<IPromptService, PromptService>();
-        //services.AddSingleton<IAuthService, AuthService>();
-        //services.AddSingleton<IDesignerService, DesignerService>();
-        //services.AddSingleton<IWebPageStateService, WebPageStateService>();
-        //services.AddSingleton<IWindowService, WindowService>();
-        //services.AddSingleton<IWebPageEditService, WebPageEditService>();
+        services.AddSingleton<IPromptService, PromptService>();
     }
     private void ConfigureViewModels(ServiceCollection services)
     {
