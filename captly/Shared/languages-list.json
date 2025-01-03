@@ -1,0 +1,427 @@
+[
+    {
+        "EnglishName": "Polish",
+        "NativeName": "Polski",
+        "Code": "pl"
+    },
+    {
+        "EnglishName": "English",
+        "NativeName": "English",
+        "Code": "eng"
+    },
+    {
+        "EnglishName": "Spanish",
+        "NativeName": "Espa\u00f1ol",
+        "Code": "es"
+    },
+    {
+        "EnglishName": "German",
+        "NativeName": "Deutsch",
+        "Code": "de"
+    },
+    {
+        "EnglishName": "French",
+        "NativeName": "Fran\u00e7ais",
+        "Code": "fr"
+    },
+    {
+        "EnglishName": "Italian",
+        "NativeName": "Italiano",
+        "Code": "it"
+    },
+    {
+        "EnglishName": "Portuguese",
+        "NativeName": "Portugu\u00eas",
+        "Code": "pt"
+    },
+    {
+        "EnglishName": "Russian",
+        "NativeName": "\u0420\u0443\u0441\u0441\u043a\u0438\u0439",
+        "Code": "ru"
+    },
+    {
+        "EnglishName": "Chinese",
+        "NativeName": "\u4e2d\u6587",
+        "Code": "zh"
+    },
+    {
+        "EnglishName": "Arabic",
+        "NativeName": "\u0627\u0644\u0639\u0631\u0628\u064a\u0629",
+        "Code": "ar"
+    },
+    {
+        "EnglishName": "Japanese",
+        "NativeName": "\u65e5\u672c\u8a9e",
+        "Code": "ja"
+    },
+    {
+        "EnglishName": "Korean",
+        "NativeName": "\ud55c\uad6d\uc5b4",
+        "Code": "ko"
+    },
+    {
+        "EnglishName": "Hindi",
+        "NativeName": "\u0939\u093f\u0928\u094d\u0926\u0940",
+        "Code": "hi"
+    },
+    {
+        "EnglishName": "Bengali",
+        "NativeName": "\u09ac\u09be\u0982\u09b2\u09be",
+        "Code": "bn"
+    },
+    {
+        "EnglishName": "Punjabi",
+        "NativeName": "\u0a2a\u0a70\u0a1c\u0a3e\u0a2c\u0a40",
+        "Code": "pa"
+    },
+    {
+        "EnglishName": "Swahili",
+        "NativeName": "Kiswahili",
+        "Code": "sw"
+    },
+    {
+        "EnglishName": "Turkish",
+        "NativeName": "T\u00fcrk\u00e7e",
+        "Code": "tr"
+    },
+    {
+        "EnglishName": "Dutch",
+        "NativeName": "Nederlands",
+        "Code": "nl"
+    },
+    {
+        "EnglishName": "Greek",
+        "NativeName": "\u0395\u03bb\u03bb\u03b7\u03bd\u03b9\u03ba\u03ac",
+        "Code": "el"
+    },
+    {
+        "EnglishName": "Hebrew",
+        "NativeName": "\u05e2\u05d1\u05e8\u05d9\u05ea",
+        "Code": "he"
+    },
+    {
+        "EnglishName": "Czech",
+        "NativeName": "\u010ce\u0161tina",
+        "Code": "cs"
+    },
+    {
+        "EnglishName": "Swedish",
+        "NativeName": "Svenska",
+        "Code": "sv"
+    },
+    {
+        "EnglishName": "Danish",
+        "NativeName": "Dansk",
+        "Code": "da"
+    },
+    {
+        "EnglishName": "Norwegian",
+        "NativeName": "Norsk",
+        "Code": "no"
+    },
+    {
+        "EnglishName": "Finnish",
+        "NativeName": "Suomi",
+        "Code": "fi"
+    },
+    {
+        "EnglishName": "Hungarian",
+        "NativeName": "Magyar",
+        "Code": "hu"
+    },
+    {
+        "EnglishName": "Romanian",
+        "NativeName": "Rom\u00e2n\u0103",
+        "Code": "ro"
+    },
+    {
+        "EnglishName": "Thai",
+        "NativeName": "\u0e44\u0e17\u0e22",
+        "Code": "th"
+    },
+    {
+        "EnglishName": "Ukrainian",
+        "NativeName": "\u0423\u043a\u0440\u0430\u0457\u043d\u0441\u044c\u043a\u0430",
+        "Code": "uk"
+    },
+    {
+        "EnglishName": "Vietnamese",
+        "NativeName": "Ti\u1ebfng Vi\u1ec7t",
+        "Code": "vi"
+    },
+    {
+        "EnglishName": "Malay",
+        "NativeName": "Melayu",
+        "Code": "ms"
+    },
+    {
+        "EnglishName": "Tagalog",
+        "NativeName": "Filipino",
+        "Code": "tl"
+    },
+    {
+        "EnglishName": "Indonesian",
+        "NativeName": "Bahasa Indonesia",
+        "Code": "id"
+    },
+    {
+        "EnglishName": "Persian",
+        "NativeName": "\u0641\u0627\u0631\u0633\u06cc",
+        "Code": "fa"
+    },
+    {
+        "EnglishName": "Zulu",
+        "NativeName": "isiZulu",
+        "Code": "zu"
+    },
+    {
+        "EnglishName": "Haitian Creole",
+        "NativeName": "Krey\u00f2l Ayisyen",
+        "Code": "ht"
+    },
+    {
+        "EnglishName": "Serbian",
+        "NativeName": "\u0421\u0440\u043f\u0441\u043a\u0438",
+        "Code": "sr"
+    },
+    {
+        "EnglishName": "Croatian",
+        "NativeName": "Hrvatski",
+        "Code": "hr"
+    },
+    {
+        "EnglishName": "Bosnian",
+        "NativeName": "Bosanski",
+        "Code": "bs"
+    },
+    {
+        "EnglishName": "Slovak",
+        "NativeName": "Sloven\u010dina",
+        "Code": "sk"
+    },
+    {
+        "EnglishName": "Bulgarian",
+        "NativeName": "\u0411\u044a\u043b\u0433\u0430\u0440\u0441\u043a\u0438",
+        "Code": "bg"
+    },
+    {
+        "EnglishName": "Slovenian",
+        "NativeName": "Sloven\u0161\u010dina",
+        "Code": "sl"
+    },
+    {
+        "EnglishName": "Latvian",
+        "NativeName": "Latvie\u0161u",
+        "Code": "lv"
+    },
+    {
+        "EnglishName": "Lithuanian",
+        "NativeName": "Lietuvi\u0173",
+        "Code": "lt"
+    },
+    {
+        "EnglishName": "Estonian",
+        "NativeName": "Eesti",
+        "Code": "et"
+    },
+    {
+        "EnglishName": "Icelandic",
+        "NativeName": "\u00cdslenska",
+        "Code": "is"
+    },
+    {
+        "EnglishName": "Maltese",
+        "NativeName": "Malti",
+        "Code": "mt"
+    },
+    {
+        "EnglishName": "Albanian",
+        "NativeName": "Shqip",
+        "Code": "sq"
+    },
+    {
+        "EnglishName": "Macedonian",
+        "NativeName": "\u041c\u0430\u043a\u0435\u0434\u043e\u043d\u0441\u043a\u0438",
+        "Code": "mk"
+    },
+    {
+        "EnglishName": "Montenegrin",
+        "NativeName": "Crnogorski",
+        "Code": "cnr"
+    },
+    {
+        "EnglishName": "Armenian",
+        "NativeName": "\u0540\u0561\u0575\u0565\u0580\u0565\u0576",
+        "Code": "hy"
+    },
+    {
+        "EnglishName": "Georgian",
+        "NativeName": "\u10e5\u10d0\u10e0\u10d7\u10e3\u10da\u10d8",
+        "Code": "ka"
+    },
+    {
+        "EnglishName": "Azerbaijani",
+        "NativeName": "Az\u0259rbaycan dili",
+        "Code": "az"
+    },
+    {
+        "EnglishName": "Kazakh",
+        "NativeName": "\u049a\u0430\u0437\u0430\u049b \u0442\u0456\u043b\u0456",
+        "Code": "kk"
+    },
+    {
+        "EnglishName": "Uzbek",
+        "NativeName": "O\u02bbzbek",
+        "Code": "uz"
+    },
+    {
+        "EnglishName": "Tajik",
+        "NativeName": "\u0422\u043e\u04b7\u0438\u043a\u04e3",
+        "Code": "tg"
+    },
+    {
+        "EnglishName": "Kyrgyz",
+        "NativeName": "\u041a\u044b\u0440\u0433\u044b\u0437\u0447\u0430",
+        "Code": "ky"
+    },
+    {
+        "EnglishName": "Turkmen",
+        "NativeName": "T\u00fcrkmen\u00e7e",
+        "Code": "tk"
+    },
+    {
+        "EnglishName": "Pashto",
+        "NativeName": "\u067e\u069a\u062a\u0648",
+        "Code": "ps"
+    },
+    {
+        "EnglishName": "Sindhi",
+        "NativeName": "\u0633\u0646\u068c\u064a",
+        "Code": "sd"
+    },
+    {
+        "EnglishName": "Nepali",
+        "NativeName": "\u0928\u0947\u092a\u093e\u0932\u0940",
+        "Code": "ne"
+    },
+    {
+        "EnglishName": "Sinhala",
+        "NativeName": "\u0dc3\u0dd2\u0d82\u0dc4\u0dbd",
+        "Code": "si"
+    },
+    {
+        "EnglishName": "Mongolian",
+        "NativeName": "\u041c\u043e\u043d\u0433\u043e\u043b",
+        "Code": "mn"
+    },
+    {
+        "EnglishName": "Aragonese",
+        "NativeName": "Aragon\u00e9s",
+        "Code": "an"
+    },
+    {
+        "EnglishName": "Asturian",
+        "NativeName": "Asturianu",
+        "Code": "ast"
+    },
+    {
+        "EnglishName": "Breton",
+        "NativeName": "Brezhoneg",
+        "Code": "br"
+    },
+    {
+        "EnglishName": "Catalan",
+        "NativeName": "Catal\u00e0",
+        "Code": "ca"
+    },
+    {
+        "EnglishName": "Corsican",
+        "NativeName": "Corsu",
+        "Code": "co"
+    },
+    {
+        "EnglishName": "Galician",
+        "NativeName": "Galego",
+        "Code": "gl"
+    },
+    {
+        "EnglishName": "Occitan",
+        "NativeName": "Occitan",
+        "Code": "oc"
+    },
+    {
+        "EnglishName": "Quechua",
+        "NativeName": "Runa Simi",
+        "Code": "qu"
+    },
+    {
+        "EnglishName": "Sami",
+        "NativeName": "S\u00e1mi",
+        "Code": "se"
+    },
+    {
+        "EnglishName": "Welsh",
+        "NativeName": "Cymraeg",
+        "Code": "cy"
+    },
+    {
+        "EnglishName": "Irish",
+        "NativeName": "Gaeilge",
+        "Code": "ga"
+    },
+    {
+        "EnglishName": "Scottish Gaelic",
+        "NativeName": "G\u00e0idhlig",
+        "Code": "gd"
+    },
+    {
+        "EnglishName": "Basque",
+        "NativeName": "Euskara",
+        "Code": "eu"
+    },
+    {
+        "EnglishName": "Haitian",
+        "NativeName": "Krey\u00f2l Ayisyen",
+        "Code": "ht"
+    },
+    {
+        "EnglishName": "Fijian",
+        "NativeName": "Na Vosa Vakaviti",
+        "Code": "fj"
+    },
+    {
+        "EnglishName": "Hmong",
+        "NativeName": "Hmoob",
+        "Code": "hmn"
+    },
+    {
+        "EnglishName": "Maori",
+        "NativeName": "M\u0101ori",
+        "Code": "mi"
+    },
+    {
+        "EnglishName": "Samoan",
+        "NativeName": "Gagana Samoa",
+        "Code": "sm"
+    },
+    {
+        "EnglishName": "Tongan",
+        "NativeName": "faka-Tonga",
+        "Code": "to"
+    },
+    {
+        "EnglishName": "Yiddish",
+        "NativeName": "\u05d9\u05d9\u05b4\u05d3\u05d9\u05e9",
+        "Code": "yi"
+    },
+    {
+        "EnglishName": "Xhosa",
+        "NativeName": "isiXhosa",
+        "Code": "xh"
+    },
+    {
+        "EnglishName": "Zulu",
+        "NativeName": "isiZulu",
+        "Code": "zu"
+    }
+]

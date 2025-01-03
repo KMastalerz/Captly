@@ -1,0 +1,22 @@
+{
+  "AdditionalFileOption": "Create additional file with language code for example \"_en\" or \"_pl\" at the end of name.",
+  "SubFolderOption": "Insert translated file into selected Language sub-folder.",
+  "OverriteFileOption": "Create temporarty file, but overrite original when translation is finished.",
+  "CustomSaveOption": "Save translated file in custom location and under custom name.",
+  "Name": "Name",
+  "Extension": "Extension",
+  "Encoding": "Encoding",
+  "Status": "Status",
+  "Settings": "Settings",
+  "Translate": "Translate",
+  "Pause": "Pause",
+  "Continue": "Continue",
+  "Retry": "Retry",
+  "Remove": "Remove",
+  "ElapsedTime": "Elapsed Time",
+  "RequestFailedRequest": "Request \\ Failed Request",
+  "InputOutputTokens": "Input \\ Output Tokens",
+  "SelectFolder": "Select folder",
+  "SelectFile": "Select file",
+  "TranslateAllFiles": "Translate all files"
+}

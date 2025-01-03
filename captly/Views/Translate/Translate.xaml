@@ -1,0 +1,236 @@
+﻿<UserControl x:Class="captly.Views.Translate"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:captly.Views"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:converters="clr-namespace:captly.Converters"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance Type=local:TranslateViewModel, IsDesignTimeCreatable=False}">
+    <UserControl.Resources>
+        <converters:NullToBooleanConverter x:Key="NullToBoolean"/>
+    </UserControl.Resources>
+    <Grid Margin="12">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal" Grid.ColumnSpan="2">
+            <Button Style="{StaticResource MaterialDesignFlatButton}"
+                            Content="{materialDesign:PackIcon Kind=Folder, Size=20}"
+                            Foreground="DarkGray"
+                            Padding="0"
+                            Width="24"
+                            Height="24"
+                            ToolTip="{Binding Prompts.SelectFolder}"
+                            Command="{Binding SelectFolderCommand}"
+                            CommandParameter="{Binding}"/>
+            <Button Style="{StaticResource MaterialDesignFlatButton}"
+                            Content="{materialDesign:PackIcon Kind=File, Size=20}"
+                            Foreground="SandyBrown"
+                            Padding="0"
+                            Margin="12 0 0 0"
+                            Width="24"
+                            Height="24"
+                            ToolTip="{Binding Prompts.SelectFile}"
+                            Command="{Binding SelectFileCommand}"
+                            CommandParameter="{Binding}"/>
+            <Button Style="{StaticResource MaterialDesignFlatButton}"
+                            Content="{materialDesign:PackIcon Kind=Translate, Size=20}"
+                            Padding="0"
+                            Margin="12 0 0 0"
+                            Width="24"
+                            Height="24"
+                            ToolTip="{Binding Prompts.TranslateAllFiles}"
+                            Command="{Binding TranslateAllFilesCommand}"
+                            CommandParameter="{Binding}"/>
+        </StackPanel>
+
+        <!--Create listview of items, that shows FileName, FilePath, FileExtension, FileSize and a Button for each element in Files-->
+        <ListView Grid.Row="1"
+                          Margin="0 12 0 0"
+                          ItemsSource="{Binding Files}">
+            <!-- Header Container Style -->
+            <ListView.Resources>
+                <Style TargetType="GridViewColumnHeader">
+
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="GridViewColumnHeader">
+                                <Grid>
+                                    <!-- Background Content -->
+                                    <Border Background="{TemplateBinding Background}" 
+                                                    BorderBrush="{TemplateBinding BorderBrush}" 
+                                                    BorderThickness="0" />
+
+                                    <!-- Content -->
+                                    <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+
+                                    <!-- Thumb for Resizing -->
+                                    <Thumb x:Name="PART_HeaderGripper" 
+                                                   HorizontalAlignment="Right" 
+                                                   Width="4" 
+                                                   Background="Transparent" 
+                                                   Cursor="SizeWE" />
+                                </Grid>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    <!-- No Margin and Padding -->
+                    <Setter Property="Margin" Value="6 4 4 0"/>
+                    <Setter Property="Padding" Value="0"/>
+
+                    <!-- Bold Font and Opacity -->
+                    <Setter Property="FontWeight" Value="SemiBold"/>
+                    <Setter Property="FontSize" Value="12"/>
+                    <Setter Property="Opacity" Value="0.5"/>
+
+                    <!-- Remove Hover and Click Effects -->
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="BorderBrush" Value="Transparent"/>
+                </Style>
+            </ListView.Resources>
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <!-- Set content alignment to Stretch -->
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+
+                    <!-- Remove default selection and hover styles -->
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="BorderBrush" Value="Transparent"/>
+
+                    <!-- Font -->
+                    <Setter Property="FontSize" Value="11"/>
+
+                    <!-- Style for hover and selection states -->
+                    <Style.Triggers>
+                        <!-- Remove hover effect -->
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="BorderBrush" Value="Transparent"/>
+                        </Trigger>
+                        <!-- Remove selection effect -->
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="BorderBrush" Value="Transparent"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.View>
+                <GridView  AllowsColumnReorder="True">
+                    <GridViewColumn Header="{Binding Prompts.Name}" DisplayMemberBinding="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Width="360"/>
+                    <GridViewColumn Header="{Binding Prompts.Extension}" DisplayMemberBinding="{Binding Extension, UpdateSourceTrigger=PropertyChanged}"/>
+                    <GridViewColumn Header="{Binding Prompts.Encoding}" DisplayMemberBinding="{Binding Encoding.EncodingName, UpdateSourceTrigger=PropertyChanged}"/>
+                    <GridViewColumn Header="{Binding Prompts.Status}" DisplayMemberBinding="{Binding Status, UpdateSourceTrigger=PropertyChanged}" Width="100"/>
+                    <GridViewColumn Header="">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button Content="{Binding DataContext.Prompts.Settings, RelativeSource={RelativeSource AncestorType=ListView}}"
+                                                    FontSize="11"
+                                                    Padding="8 4"
+                                                    Height="22"
+                                                    Style="{StaticResource MaterialDesignFlatButton}"
+                                                    Command="{Binding DataContext.SetTranslationSettings, RelativeSource={RelativeSource AncestorType=ListView}}"
+                                                    CommandParameter="{Binding}"/>
+                                    <Button Content="{Binding DataContext.Prompts.Translate, RelativeSource={RelativeSource AncestorType=ListView}}"
+                                                    FontSize="11"
+                                                    Padding="8 4"
+                                                    Height="22"
+                                                    Style="{StaticResource MaterialDesignFlatButton}"
+                                                    Command="{Binding DataContext.TranslateFileCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
+                                                    CommandParameter="{Binding}"/>
+                                    <Button Content="{Binding DataContext.Prompts.Pause, RelativeSource={RelativeSource AncestorType=ListView}}"
+                                                    FontSize="11"
+                                                    Padding="8 4"
+                                                    Height="22"
+                                                    Style="{StaticResource MaterialDesignFlatButton}"
+                                                    Command="{Binding DataContext.PauseTranslationCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
+                                                    CommandParameter="{Binding}"/>
+                                    <Button Content="{Binding DataContext.Prompts.Continue, RelativeSource={RelativeSource AncestorType=ListView}}"
+                                                    FontSize="11"
+                                                    Padding="8 4"
+                                                    Height="22"
+                                                    Style="{StaticResource MaterialDesignFlatButton}"
+                                                    Command="{Binding DataContext.ContinueTranslationCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
+                                                    CommandParameter="{Binding}"/>
+                                    <Button Content="{Binding DataContext.Prompts.Retry, RelativeSource={RelativeSource AncestorType=ListView}}"
+                                                    FontSize="11"
+                                                    Padding="8 4"
+                                                    Height="22"
+                                                    Style="{StaticResource MaterialDesignFlatButton}"
+                                                    Command="{Binding DataContext.RetryTranslationCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
+                                                    CommandParameter="{Binding}"/>
+                                    <Button Content="{Binding DataContext.Prompts.Remove, RelativeSource={RelativeSource AncestorType=ListView}}"
+                                                    FontSize="11"
+                                                    Padding="8 4"
+                                                    Height="22"
+                                                    Foreground="DarkRed"
+                                                    Style="{StaticResource MaterialDesignFlatButton}"
+                                                    Command="{Binding DataContext.DeleteFileCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
+                                                    CommandParameter="{Binding}"
+                                                    Margin="12 0 0 0"/>
+                                    <Grid Width="100" Height="18" Margin="12 0 0 0">
+                                        <!-- Progress Bar -->
+                                        <ProgressBar Value="{Binding Progress, UpdateSourceTrigger=PropertyChanged}"
+                                                             Style="{StaticResource MaterialDesignLinearProgressBar}"
+                                                             FontSize="11"
+                                                             Foreground="{StaticResource MaterialDesign.Brush.Secondary.Dark}"
+                                                             Background="{StaticResource MaterialDesign.Brush.Secondary.Light}"
+                                                             BorderBrush="{StaticResource MaterialDesign.Brush.Secondary.Light}"
+                                                             Width="100"
+                                                             Height="18"/>
+
+                                        <!-- TextBlock (Embedded Text) -->
+                                        <TextBlock Text="{Binding Progress, UpdateSourceTrigger=PropertyChanged, StringFormat='{}{0:F0}%'}"
+                                                           HorizontalAlignment="Center"
+                                                           VerticalAlignment="Center"
+                                                           FontWeight="Bold"
+                                                           Foreground="Black"
+                                                           FontSize="10"/>
+                                    </Grid>
+                                </StackPanel>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="{Binding DataContext.Prompts.ElapsedTime, RelativeSource={RelativeSource AncestorType=ListView}}" 
+                                    DisplayMemberBinding="{Binding ElapsedTime, UpdateSourceTrigger=PropertyChanged}"/>
+                    <GridViewColumn Header="{Binding DataContext.Prompts.RequestFailedRequest, RelativeSource={RelativeSource AncestorType=ListView}}">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock>
+                                                <Run Text="{Binding RequestCount, UpdateSourceTrigger=PropertyChanged}" />
+                                                <Run Text="\" />
+                                                <Run Text="{Binding FailedRequestCount, UpdateSourceTrigger=PropertyChanged}" Foreground="DarkRed" />
+                                    </TextBlock>
+                                </StackPanel>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                    <GridViewColumn Header="{Binding DataContext.Prompts.InputOutputTokens, RelativeSource={RelativeSource AncestorType=ListView}}">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock>
+                                                <Run Text="{Binding InputTokenCount, UpdateSourceTrigger=PropertyChanged}" Foreground="Green" />
+                                                <Run Text="\" />
+                                                <Run Text="{Binding OutputTokenCount, UpdateSourceTrigger=PropertyChanged}" Foreground="Orange" />
+                                    </TextBlock>
+                                </StackPanel>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+
+        </ListView>
+    </Grid>
+</UserControl>

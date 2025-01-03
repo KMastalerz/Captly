@@ -1,0 +1,34 @@
+* User wants to open video file
+* User wants to open all video files in folder
+* User wants to open subtitile file
+* User wants to open all subtitile in folder
+* User wants to have all progres and information to be saved
+* User wants to see progres of translation
+* User wants to pause translation
+* User wants to continue translation
+* User wants to retry errored translation 
+* User wants to be able to select language from and language to. 
+* User wants to generate translations.
+* User wants to set API Key
+* User wants to set whisper path
+* User wants to select whisper model
+* User wants to select language to which translate to
+* User wants to add generated subtitles to translation
+* User wants to see used Tokens count
+* User wants to see request counts
+* User wants to set destination path for generation
+* User wants to set destination path for translation
+* User wants to set behavior for generation file
+* User wants to set behavior for translation file
+
+
+-------------------
+select language to translate file into
+
+set destination path: 
+*create additional file with language code added to name
+*create language sub folder, place translations there 
+*overrite original file after save
+*set saving path and name
+
+/* changing the destination language will cause a complete restart of translation! "/

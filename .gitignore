@@ -1,0 +1,11 @@
+# Ignore all bin directories at any depth
+bin/
+
+# Ignore all obj directories at any depth
+obj/
+
+# Ignore all .vs directories at any depth
+.vs/
+
+# Ignore all appsettings.json files at any depth
+**/appsettings.json
