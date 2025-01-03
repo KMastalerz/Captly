@@ -5,16 +5,43 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:captly.Views"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             mc:Ignorable="d">
-    <Grid>
-        <StackPanel>
-            <ComboBox/>
-            <CheckBox Content="{Binding Prompts.AdditionalFileOption}"/>
-            <CheckBox Content="{Binding Prompts.SubFolderOption}"/>
-            <CheckBox Content="{Binding Prompts.OverriteFileOption}"/>
-            <CheckBox Content="{Binding Prompts.CustomSaveOption}"/>
-            <TextBox/>
-            <TextBox/>
+             mc:Ignorable="d"
+              d:DataContext="{d:DesignInstance Type=local:TranslateOptionsViewModel, IsDesignTimeCreatable=False}">
+    <Grid Margin="12">
+        <StackPanel >
+            <ComboBox ItemsSource="{Binding Languages}"
+                      SelectedItem="{Binding SelectedLanguage}"
+                      Style="{StaticResource MaterialDesignFilledComboBox}"
+                      materialDesign:HintAssist.Hint="{Binding Prompts.Language}"
+                      HorizontalAlignment="Left"
+                      Width="200"/>
+            <CheckBox Content="{Binding Prompts.AdditionalFileOption}"
+                      Style="{StaticResource MaterialDesignCheckBox}"
+                      Margin="0 8 0 0"/>
+            <CheckBox Content="{Binding Prompts.SubFolderOption}"
+                      Style="{StaticResource MaterialDesignCheckBox}"
+                      Margin="0 8 0 0"/>
+            <CheckBox Content="{Binding Prompts.OverriteFileOption}"
+                      Style="{StaticResource MaterialDesignCheckBox}"
+                      Margin="0 8 0 0"/>
+            <CheckBox Content="{Binding Prompts.CustomSaveOption}"
+                      Style="{StaticResource MaterialDesignCheckBox}"
+                      Margin="0 8 0 0"/>
+            <TextBox Style="{StaticResource MaterialDesignFilledTextBox}"
+                     materialDesign:HintAssist.Hint="{Binding Prompts.FilePath}"
+                     Margin="0 8 0 0"/>
+            <TextBox Style="{StaticResource MaterialDesignFilledTextBox}"
+                     materialDesign:HintAssist.Hint="{Binding Prompts.FileName}"
+                     Margin="0 8 0 0"/>
+            <StackPanel Orientation="Horizontal"
+                        Margin="0 8 0 0">
+                <Button Content="Save"
+                        Style="{StaticResource MaterialDesignFlatDarkBgButton}"/>
+                <Button Content="Close"
+                        Margin="8 0 0 0"
+                        Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
+                        Style="{StaticResource MaterialDesignFlatDarkButton}"/>
+            </StackPanel>
         </StackPanel>
     </Grid>
 </UserControl>

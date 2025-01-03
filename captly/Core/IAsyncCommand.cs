@@ -1,7 +1,7 @@
 ﻿using System.Windows.Input;
 
 namespace captly.Core;
-internal interface IAsyncCommand : ICommand
+public interface IAsyncCommand : ICommand
 {
     IEnumerable<Task> RunningTasks { get; }
     new bool CanExecute(object? parameter = null);

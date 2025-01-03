@@ -39,11 +39,11 @@ internal class MainWindowViewModel: BaseViewModel
         set => SetProperty(ref isSnackbarActive, value);
     }
 
-    private bool isDraweOpen = false;
+    private bool isDrawerOpen = false;
     public bool IsDrawerOpen
     {
-        get => isDraweOpen;
-        set => SetProperty(ref isDraweOpen, value);
+        get => isDrawerOpen;
+        set => SetProperty(ref isDrawerOpen, value);
     }
 
     private Style? snackbarStyle;

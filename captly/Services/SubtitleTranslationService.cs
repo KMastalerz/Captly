@@ -6,7 +6,6 @@ using captly.Model;
 using Newtonsoft.Json;
 using OpenAI.Chat;
 using System.IO;
-using System.Text;
 
 namespace captly.Services;
 internal class SubtitleTranslationService(IApplicationCacheStateService applicationCacheStateService, IApplicationConfigurationService applicationConfigurationService) : ISubtitleTranslationService
@@ -27,7 +26,7 @@ internal class SubtitleTranslationService(IApplicationCacheStateService applicat
             var subtitlesLength = subtitles.Count;
 
             // remove id's already translated 
-            subtitles = subtitles.Where(s => s.Index <= initialID).ToList();
+            subtitles = subtitles.Where(s => s.Index > initialID).ToList();
 
             // set state to translating
             await subtitlesView.UpdateStatus(TranslationStatus.Translating);
@@ -36,6 +35,8 @@ internal class SubtitleTranslationService(IApplicationCacheStateService applicat
             _ = subtitlesView.StartElapsedTimeTracking();
 
             // read current file config
+            var subtitlesConfig = subtitlesView.SubtitlesSetup ?? applicationConfigurationService.ApplicationConfiguration.SubtitlesSetup;
+            var language = string.IsNullOrEmpty(subtitlesView.Language) ? applicationConfigurationService.ApplicationConfiguration.DefaultLanguage : subtitlesView.Language;
 
             // create new communication chat and history
             var client = new ChatClient(
@@ -47,7 +48,7 @@ internal class SubtitleTranslationService(IApplicationCacheStateService applicat
             const int chunkSize = 15;
 
             // read translation prompt
-            var translationPrompt = applicationConfigurationService.TranslationPrompt.Replace("{@Language}", subtitlesView.Language);
+            var translationPrompt = applicationConfigurationService.TranslationPrompt.Replace("{@Language}", language);
 
             for (int i = 0; i < subtitles.Count(); i += chunkSize)
             {
@@ -88,7 +89,8 @@ internal class SubtitleTranslationService(IApplicationCacheStateService applicat
                     subtitlesView.LastTranslatedID = currentMaxID; // Update last translated ID, so that progress can be cached
 
 
-                    // save translated file
+                    // save translated file based on subtitlesConfig
+
 
 
                     // update cache
@@ -107,9 +109,9 @@ internal class SubtitleTranslationService(IApplicationCacheStateService applicat
 
             // if completed, stop translation clock, set state to completed and save translation to cache
         }
-        catch
+        catch(Exception ex) 
         {
-
+            var ext = ex;
         }
 
     }

@@ -1,5 +1,5 @@
 ﻿namespace captly.Model;
-internal class Subtitle
+public class Subtitle
 {
     public int Index { get; set; }
     public string Text { get; set; } = default!;

@@ -1,5 +1,6 @@
 ﻿using captly.Core;
 using captly.Enums;
+using captly.Interfaces;
 using captly.Model;
 using Microsoft.Win32;
 using System.IO;
@@ -9,7 +10,7 @@ using System.Windows.Input;
 namespace captly.Views;
 internal class TranslateCommands
 {
-    public class SelectFolder() : ICommand
+    public class SelectFolder(IApplicationConfigurationService applicationConfigurationService) : ICommand
     {
         public event EventHandler? CanExecuteChanged;
 
@@ -29,7 +30,7 @@ internal class TranslateCommands
                         using (var reader = new StreamReader(file, Encoding.Default, true))
                         {
                             reader.Peek(); // Force StreamReader to detect encoding
-                            translateViewModel.Files.Add(new(new(file), reader.CurrentEncoding));
+                            translateViewModel.Files.Add(new(new(file), reader.CurrentEncoding, applicationConfigurationService));
                         }
                     }
                 }
@@ -37,7 +38,7 @@ internal class TranslateCommands
         }
     }
 
-    public class SelectFile : ICommand
+    public class SelectFile(IApplicationConfigurationService applicationConfigurationService) : ICommand
     {
         public event EventHandler? CanExecuteChanged;
 
@@ -63,7 +64,7 @@ internal class TranslateCommands
                     {
                         reader.Peek(); // Force StreamReader to detect encoding
                         translateViewModel.Files.Clear(); // Optionally clear existing files
-                        translateViewModel.Files.Add(new(new(selectedFile), reader.CurrentEncoding));
+                        translateViewModel.Files.Add(new(new(selectedFile), reader.CurrentEncoding, applicationConfigurationService));
                     }
                 }
             }
@@ -81,6 +82,29 @@ internal class TranslateCommands
             if (parameter is SubtitlesView subtitlesView)
             {
                 translateViewModel.Files.Remove(subtitlesView);
+            }
+        }
+    }
+
+    public class OpenSettings(IDisplayService displayService, ITranslateStateService translateStateService) : ICommand
+    {
+        public event EventHandler? CanExecuteChanged;
+
+        public bool CanExecute(object? parameter)
+        {
+            if (parameter is SubtitlesView subtitlesView)
+            {
+                return subtitlesView.Status != TranslationStatus.Translating;
+            }
+            return false;
+        }
+
+        public void Execute(object? parameter)
+        {
+            if(parameter is SubtitlesView subtitlesView)
+            {
+                translateStateService.SelectedSubtitle = subtitlesView;
+                displayService.OpenDialog(new TranslateOptions());
             }
         }
     }
@@ -184,11 +208,11 @@ internal class TranslateCommands
             else return false;
         }
 
-        public override Task ExecuteAsync(object? parameter = null)
+        public override async Task ExecuteAsync(object? parameter = null)
         {
             if (parameter is SubtitlesView subtitlesView)
             {
-                await subtitleTranslationService.PauseTranslation(subtitlesView);
+                //await subtitleTranslationService.PauseTranslation(subtitlesView);
             }
         }
     }

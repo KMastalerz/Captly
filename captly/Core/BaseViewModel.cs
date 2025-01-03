@@ -2,7 +2,7 @@
 using System.Runtime.CompilerServices;
 
 namespace captly.Core;
-internal class BaseViewModel : INotifyPropertyChanged
+public class BaseViewModel : INotifyPropertyChanged
 {
     // The PropertyChanged event is raised whenever a property is changed
     public event PropertyChangedEventHandler? PropertyChanged;

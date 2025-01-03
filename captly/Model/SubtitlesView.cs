@@ -1,15 +1,19 @@
 ﻿using captly.Core;
 using captly.Enums;
+using captly.Interfaces;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
 using System.Windows;
 
 namespace captly.Model;
-internal class SubtitlesView: BaseViewModel
+public class SubtitlesView: BaseViewModel
 {
-    public SubtitlesView(FileInfo fileInfo, Encoding encoding)
+    public SubtitlesView(FileInfo fileInfo, Encoding encoding, IApplicationConfigurationService applicationConfigurationService)
     {
+        var Language = applicationConfigurationService.Languages.FirstOrDefault(l =>
+            l.EnglishName == applicationConfigurationService.ApplicationConfiguration.DefaultLanguage);
+
         subtitles.Path = fileInfo.FullName;
         subtitles.Name = System.IO.Path.GetFileNameWithoutExtension(fileInfo.FullName);
         subtitles.Extension = fileInfo.Extension;
@@ -22,7 +26,7 @@ internal class SubtitlesView: BaseViewModel
         subtitles.OutputTokenCount = 0;
         subtitles.ElapsedTime = string.Empty;
         subtitles.Error = string.Empty;
-        subtitles.Language = string.Empty;
+        subtitles.Language = Language?.NativeName ?? string.Empty;
         subtitles.LastTranslatedID = 0;
     }
 

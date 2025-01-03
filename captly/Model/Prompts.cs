@@ -1,5 +1,5 @@
 ﻿namespace captly.Model;
-internal class Prompts
+public class Prompts
 {
     public string AdditionalFileOption { get; set; } = "Create additional file with language code for example \"_en\" or \"_pl\" at the end of name.";
     public string SubFolderOption { get; set; } = "Insert translated file into selected Language sub-folder.";
@@ -21,4 +21,7 @@ internal class Prompts
     public string SelectFolder { get; set; } = "Select folder";
     public string SelectFile { get; set; } = "Select file";
     public string TranslateAllFiles { get; set; } = "Translate all files";
+    public string FilePath { get; set; } = "File path";
+    public string FileName { get; set; } = "File name";
+    public string Language { get; set; } = "Language";
 }

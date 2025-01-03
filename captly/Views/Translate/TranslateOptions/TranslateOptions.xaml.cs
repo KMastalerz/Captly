@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using Microsoft.Extensions.DependencyInjection;
+using System.Windows.Controls;
 
 namespace captly.Views;
 /// <summary>
@@ -9,5 +10,6 @@ public partial class TranslateOptions : UserControl
     public TranslateOptions()
     {
         InitializeComponent();
+        DataContext = App.ServiceProvider.GetRequiredService<TranslateOptionsViewModel>();
     }
 }

@@ -3,7 +3,7 @@ using System.Text;
 
 namespace captly.Model;
 
-internal class Subtitles
+public class Subtitles
 {
     public string Name { get; set; } = default!;
     public string Path { get; set; } = default!;

@@ -1,7 +1,7 @@
 ﻿using captly.Model;
 
 namespace captly.Interfaces;
-internal interface IPromptService
+public interface IPromptService
 {
     Prompts Prompts { get; set; }
 }

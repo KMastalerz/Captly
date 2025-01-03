@@ -1,5 +1,5 @@
 ﻿namespace captly.Enums;
-internal enum Functionalities
+public enum Functionalities
 {
     Translate,
     Generate,

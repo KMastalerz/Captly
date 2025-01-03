@@ -137,7 +137,7 @@
                                                     Padding="8 4"
                                                     Height="22"
                                                     Style="{StaticResource MaterialDesignFlatButton}"
-                                                    Command="{Binding DataContext.SetTranslationSettings, RelativeSource={RelativeSource AncestorType=ListView}}"
+                                                    Command="{Binding DataContext.OpenSettingsCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
                                                     CommandParameter="{Binding}"/>
                                     <Button Content="{Binding DataContext.Prompts.Translate, RelativeSource={RelativeSource AncestorType=ListView}}"
                                                     FontSize="11"

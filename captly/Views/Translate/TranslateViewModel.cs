@@ -6,19 +6,24 @@ using System.Windows.Input;
 using static captly.Views.TranslateCommands;
 
 namespace captly.Views;
-internal class TranslateViewModel: BaseViewModel
+public class TranslateViewModel: BaseViewModel
 {
 
     private readonly IPromptService promptService;
-    public TranslateViewModel(ISubtitleTranslationService subtitleTranslateService, IPromptService promptService)
+    public TranslateViewModel(
+        ISubtitleTranslationService subtitleTranslateService, 
+        IPromptService promptService, 
+        IDisplayService displayService,
+        ITranslateStateService translateStateService,
+        IApplicationConfigurationService applicationConfigurationService)
     {
-        SelectFolderCommand = new SelectFolder();
+        SelectFolderCommand = new SelectFolder(applicationConfigurationService);
         DeleteFileCommand = new DeleteFile(this);
-        SelectFileCommand = new SelectFile();
+        SelectFileCommand = new SelectFile(applicationConfigurationService);
+        OpenSettingsCommand = new OpenSettings(displayService, translateStateService);
         TranslateFileCommand = new TranslateFile(subtitleTranslateService);
         TranslateAllFilesCommand = new TranslateAllFiles(subtitleTranslateService);
         PauseTranslationCommand = new PauseTranslation(subtitleTranslateService);
-        Languages = Task.Run(()=> subtitleTranslateService.GetLanguages()).Result;
         this.promptService = promptService;
     }
 
@@ -31,18 +36,12 @@ internal class TranslateViewModel: BaseViewModel
         set => SetProperty(ref files, value);
     }
 
-    private List<Language> languages = [];
-    public List<Language> Languages
-    {
-        get => languages;
-        set => SetProperty(ref languages, value);
-    }
-
     public Prompts Prompts => promptService.Prompts;
 
     public ICommand SelectFolderCommand { get; }
     public ICommand DeleteFileCommand { get; }
     public ICommand SelectFileCommand { get; }
+    public ICommand OpenSettingsCommand { get; }
     public IAsyncCommand TranslateFileCommand { get; }
     public IAsyncCommand TranslateAllFilesCommand { get; }
     public IAsyncCommand PauseTranslationCommand { get; }

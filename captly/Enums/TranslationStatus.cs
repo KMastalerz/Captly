@@ -1,5 +1,5 @@
 ﻿namespace captly.Enums;
-internal enum TranslationStatus
+public enum TranslationStatus
 {
     New, 
     Translating,

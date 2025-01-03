@@ -18,5 +18,8 @@
   "InputOutputTokens": "Input \\ Output Tokens",
   "SelectFolder": "Select folder",
   "SelectFile": "Select file",
-  "TranslateAllFiles": "Translate all files"
+  "TranslateAllFiles": "Translate all files",
+  "FilePath": "File path",
+  "FileName": "File name",
+  "Language": "Language"
 }
