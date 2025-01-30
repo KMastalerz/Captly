@@ -1,0 +1,110 @@
+﻿<UserControl x:Class="captly.Views.Transcription.TranscriptionList"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:captly.Views.Transcription"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DataContext="{d:DesignInstance Type=local:TranscriptionListViewModel, IsDesignTimeCreatable=False}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid>
+            <StackPanel Orientation="Horizontal">
+                <Button Content="Select Files"
+                        Foreground="#5e5e5e"
+                        Style="{StaticResource MaterialDesignFlatButton}"
+                        Command="{Binding SelectFilesCommand}"
+                        CommandParameter="{Binding}"
+                        Margin="8 8"/>
+                <Button Content="Transcribe All"
+                        Foreground="#167533"
+                        Style="{StaticResource MaterialDesignFlatButton}"
+                        Margin="8 8"/>
+                <Button Content="Global Options"
+                        Style="{StaticResource MaterialDesignFlatButton}"
+                        Margin="8 8"/>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="1">
+            <ListView ItemsSource="{Binding TranscriptionFiles}">
+                <ListView.View>
+                    <GridView>
+
+                        <!-- Name Column -->
+                        <GridViewColumn Header="Name" Width="auto" DisplayMemberBinding="{Binding Name}" />
+
+                        <!-- Extension Column -->
+                        <GridViewColumn Header="Extension" Width="Auto" DisplayMemberBinding="{Binding Extension}" />
+
+                        <!-- File Size Column (Formatted) -->
+                        <GridViewColumn Header="Size" Width="Auto">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding FileSize, Converter={StaticResource FileSizeConverter}}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
+                        <!-- File Length Column -->
+                        <GridViewColumn Header="Length" Width="Auto">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding FileLength, Converter={StaticResource TimeSpanConverter}}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
+                        <!-- Status Column -->
+                        <GridViewColumn Header="Status" Width="Auto" DisplayMemberBinding="{Binding Status}" />
+
+                        <!-- CurrentMessage Column -->
+                        <GridViewColumn Header="Whisper Message" Width="200" DisplayMemberBinding="{Binding CurrentMessage}" />
+
+                        <!-- Transcribe Button (Visible if Status is Error, New, or Stopped) -->
+                        <GridViewColumn Header="" Width="400">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Button Content="Transcribe"
+                                                Foreground="#167533"
+                                                Style="{StaticResource MaterialDesignFlatButton}"
+                                                Command="{Binding DataContext.TranscribeCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                CommandParameter="{Binding}"
+                                                Visibility="{Binding Status, Converter={StaticResource StatusToTranscribeVisibilityConverter}}"/>
+                                        <Button Content="Cancel"
+                                                Foreground="#851d22"
+                                                Style="{StaticResource MaterialDesignFlatButton}"
+                                                Command="{Binding DataContext.StopCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                CommandParameter="{Binding}"
+                                                Visibility="{Binding Status, Converter={StaticResource StatusToStopVisibilityConverter}}" />
+                                        <Button Content="Remove"
+                                                Foreground="#851d22"
+                                                Style="{StaticResource MaterialDesignFlatButton}"
+                                                Command="{Binding DataContext.RemoveCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                CommandParameter="{Binding}"
+                                                Visibility="{Binding Status, Converter={StaticResource StatusToRemoveVisibilityConverter}}"
+                                                Margin="8 0 0 0"/>
+                                        <Button Content="Options"
+                                                Style="{StaticResource MaterialDesignFlatButton}"
+                                                Command="{Binding DataContext.OptionsCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                CommandParameter="{Binding}"
+                                                Visibility="{Binding Status, Converter={StaticResource StatusToOptionsVisibilityConverter}}"
+                                                Margin="8 0 0 0"/>
+                                    </StackPanel>
+
+
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+
+        </Grid>
+
+    </Grid>
+</UserControl>

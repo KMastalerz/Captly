@@ -1,0 +1,25 @@
+## Opcje 
+
+### Transkrypcja
+
+W oknie widzimy: nazwę pliku, dlugosc, sciezke zapisu, status: New, Transribing, Error, Completed.
+
+- Nadpisanie istniejącego pliku jeśli istnieje. 
+- Zapisanie pod ścieżka pliku video, czy statyczną. 
+- Model tłumaczenia. "--model".
+- Podać czy nie język, którego używa plik audio "--language", inaczej autodetected
+- Podanie ścieżki do "faster-whisper-xxl.exe"
+- Maksymalna dłogość linii "--max_line_width", opcja pozwala ustalić ile w jednej lini może być maxymalnie znaków. 
+- Maksymalna liczba linii "--max_line_count", opcja pozwala ustalić maksymalna liczbę znaków
+- Ścieżka dźwięku "--ff_track", opcja pozwala ustalić której ściezki dzwiękowej z pliku cchemy używać. 
+- Okno do wpisania dodatkowych opcji, które zostaną dodane do przepuszczenia whisper. 
+
+### Translacja
+
+W oknie widzimy: nazwę pliku, długość, format, kodowanie, język do którego tłumaczyć, liczbe tokenów, liczbe zapytań do API. status: New, Trasnlating, Translated, Paused, Error
+
+- Nadpisanie istniejącego pliku jeśli istnieje. 
+- Wybor zachowania zapisu, ściezki zapisu wygenerowanego pliku. 
+- Wybor sciezki starego pliku, po wygenerowaniu tłumaczenia. 
+- Podanie APIKey, do OpenAI. 
+- Wybór języka do którego tłumaczyć pliki. 

@@ -1,0 +1,25 @@
+﻿<Application x:Class="captly.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:captly"
+             xmlns:converters="clr-namespace:captly.Convertes"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <converters:TimeSpanConverter x:Key="TimeSpanConverter"/>
+            <converters:NullToBooleanConverter x:Key="NullToBooleanConverter"/>
+            <converters:FileSizeConverter x:Key="FileSizeConverter"/>
+            <converters:StatusToTranscribeVisibilityConverter x:Key="StatusToTranscribeVisibilityConverter"/>
+            <converters:StatusToStopVisibilityConverter x:Key="StatusToStopVisibilityConverter"/>
+            <converters:StatusToRemoveVisibilityConverter x:Key="StatusToRemoveVisibilityConverter"/>
+            <converters:StatusToOptionsVisibilityConverter x:Key="StatusToOptionsVisibilityConverter"/>
+            <ResourceDictionary.MergedDictionaries>
+                <materialDesign:BundledTheme BaseTheme="Light" PrimaryColor="Indigo" SecondaryColor="Green" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesign3.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Indigo.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Secondary/MaterialDesignColor.Green.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
