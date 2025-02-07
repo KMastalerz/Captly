@@ -12,6 +12,6 @@ public partial class TranslationList : UserControl
     public TranslationList()
     {
         InitializeComponent();
-        DataContext = App.ServiceProvider.GetRequiredService<TranscriptionListViewModel>();
+        DataContext = App.ServiceProvider.GetRequiredService<TranslationListViewModel>();
     }
 }

@@ -4,9 +4,129 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:captly.Views.Translation"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance Type=local:TranslationListViewModel, IsDesignTimeCreatable=False}">
     <Grid>
-            
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid>
+            <StackPanel Orientation="Horizontal">
+                <Button Content="Select Files"
+                        Foreground="#5e5e5e"
+                        Style="{StaticResource MaterialDesignFlatButton}"
+                        Command="{Binding SelectFilesCommand}"
+                        CommandParameter="{Binding}"
+                        Margin="8 2"/>
+                <Button Content="Translate All"
+                        Foreground="#167533"
+                        Style="{StaticResource MaterialDesignFlatButton}"
+                        Margin="8 2"/>
+                <Button Content="Global Options"
+                        Style="{StaticResource MaterialDesignFlatButton}"
+                        Margin="8 2"/>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="1">
+            <ListView ItemsSource="{Binding TranslationFiles}"
+                      materialDesign:ListViewAssist.ListViewItemPadding="0"
+                      materialDesign:DataGridAssist.ColumnHeaderPadding="3 0">
+                <ListView.View>
+                    <GridView>
+                        <!-- Name Column -->
+                        <GridViewColumn Header="Name" Width="Auto">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Name}" 
+                                               Padding="4 8" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
+                        <!-- Encoding Column -->
+                        <GridViewColumn Header="Encoding" Width="Auto">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Encoding.EncodingName}" 
+                                               Padding="4 8" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
+                        <!-- Extension Column -->
+                        <GridViewColumn Header="Extension" Width="Auto">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Extension}" 
+                                               Padding="4 8" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
+
+                        <!-- File Size Column (Formatted) -->
+                        <GridViewColumn Header="Size" Width="Auto">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding FileSize, Converter={StaticResource FileSizeConverter}}" 
+                                               Padding="4 8" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
+                        <!-- Status Column -->
+                        <GridViewColumn Header="Status" Width="120">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Status}" 
+                                               Padding="4 8" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
+                        <!-- Transcribe Button (Visible if Status is Error, New, or Stopped) -->
+                        <GridViewColumn Header="" Width="400">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Button Content="Translate"
+                                                Foreground="#167533"
+                                                Style="{StaticResource MaterialDesignFlatButton}"
+                                                Command="{Binding DataContext.TranslateCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                CommandParameter="{Binding}"
+                                                Height="auto"
+                                                Visibility="{Binding Status, Converter={StaticResource StatusToTranslateVisibilityConverter}}"/>
+                                        <Button Content="Cancel"
+                                                Foreground="#851d22"
+                                                Style="{StaticResource MaterialDesignFlatButton}"
+                                                Command="{Binding DataContext.StopCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                CommandParameter="{Binding}"
+                                                Visibility="{Binding Status, Converter={StaticResource StatusToStopVisibilityConverter}}" />
+                                        <Button Content="Remove"
+                                                Foreground="#851d22"
+                                                Style="{StaticResource MaterialDesignFlatButton}"
+                                                Command="{Binding DataContext.RemoveCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                CommandParameter="{Binding}"
+                                                Visibility="{Binding Status, Converter={StaticResource StatusToRemoveVisibilityConverter}}"
+                                                Margin="8 0 0 0"/>
+                                        <Button Content="Options"
+                                                Style="{StaticResource MaterialDesignFlatButton}"
+                                                Command="{Binding DataContext.OptionsCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                CommandParameter="{Binding}"
+                                                Visibility="{Binding Status, Converter={StaticResource StatusToOptionsVisibilityConverter}}"
+                                                Margin="8 0 0 0"/>
+                                    </StackPanel>
+
+
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+
+        </Grid>
     </Grid>
 </UserControl>

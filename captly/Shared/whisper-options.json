@@ -1,0 +1,1019 @@
+[
+  {
+    "Option": "Sentence",
+    "Original": "--sentence",
+    "Type": "bool",
+    "Description": "Enables splitting lines to sentences. Every sentence starts in the new segment. By default meant to output whole sentence per line for better translations, but not limited to, read about '--max_...' parameters. Doesn't work well when --language is not specified. (default: False)",
+    "Value": false,
+    "DefaultValue": false,
+    "IsChecked": false
+  },
+  {
+    "Option": "MaxComma",
+    "Original": "--max_comma",
+    "Type": "int",
+    "Description": "(requires --sentence) After this line length a comma is treated as the end of sentence. Note: disabled if it's over or equal to --max_line_width. (default: 250)",
+    "Value": 250,
+    "DefaultValue": 250,
+    "IsChecked": false
+  },
+  {
+    "Option": "Standard",
+    "Original": "--standard",
+    "Type": "bool",
+    "Description": "Quick hardcoded preset to split lines in standard way: --max_line_width=42, --max_line_count=2, --max_comma_cent=70 and --sentence are activated automatically. (default: False)",
+    "Value": true,
+    "DefaultValue": false,
+    "IsChecked": true
+  },
+  {
+    "Option": "Model",
+    "Original": "--model",
+    "Type": "string",
+    "Description": "Name of the Whisper model to use (default: medium)",
+    "Value": "turbo",
+    "DefaultValue": "medium",
+    "IsChecked": true
+  },
+  {
+    "Option": "Device",
+    "Original": "--device",
+    "Type": "string",
+    "Description": "Device to use. Default is 'cuda' if CUDA device is detected, else is 'cpu'. If CUDA GPU is a second device then set 'cuda:1'. (default: cuda)",
+    "Value": "cuda",
+    "DefaultValue": "cuda",
+    "IsChecked": false
+  },
+  {
+    "Option": "OutputFormat",
+    "Original": "--output_format",
+    "Type": "string",
+    "Description": "Format(s) of the output file; specify multiple formats separated by spaces. Note: don't add audio after this arg. (default: ['srt'])",
+    "Value":  "srt",
+    "DefaultValue": "srt",
+    "IsChecked": false
+  },
+  {
+    "Option": "ComputeType",
+    "Original": "--compute_type",
+    "Type": "string",
+    "Description": "Type of quantization to use (see https://opennmt.net/CTranslate2/quantization.html). (default: auto)",
+    "Value": "auto",
+    "DefaultValue": "auto",
+    "IsChecked": false
+  },
+  {
+    "Option": "Verbose",
+    "Original": "--verbose",
+    "Type": "bool",
+    "Description": "Whether to print out debug messages (default: False)",
+    "Value": false,
+    "DefaultValue": false,
+    "IsChecked": false
+  },
+  {
+    "Option": "Task",
+    "Original": "--task",
+    "Type": "string",
+    "Description": "Whether to perform X->X speech recognition ('transcribe') or X->English translation ('translate') (default: transcribe)",
+    "Value": "transcribe",
+    "DefaultValue": "transcribe",
+    "IsChecked": false
+  },
+  {
+    "Option": "Language",
+    "Original": "--language",
+    "Type": "string",
+    "Description": "Language spoken in the audio, specify None to perform language detection (default: None)",
+    "Value": null,
+    "DefaultValue": null,
+    "IsChecked": false
+  },
+  {
+    "Option": "LanguageDetectionThreshold",
+    "Original": "--language_detection_threshold",
+    "Type": "float",
+    "Description": "If the maximum probability of the language tokens is higher than this value, the language is detected. (default: 0.5)",
+    "Value": 0.5,
+    "DefaultValue": 0.5,
+    "IsChecked": false
+  },
+  {
+    "Option": "LanguageDetectionSegments",
+    "Original": "--language_detection_segments",
+    "Type": "int",
+    "Description": "Number of segments/chunks to consider for the language detection. (default: 1)",
+    "Value": 1,
+    "DefaultValue": 1,
+    "IsChecked": false
+  },
+  {
+    "Option": "Temperature",
+    "Original": "--temperature",
+    "Type": "float",
+    "Description": "Temperature to use for sampling (default: 0)",
+    "Value": 0.0,
+    "DefaultValue": 0.0,
+    "IsChecked": false
+  },
+  {
+    "Option": "BestOf",
+    "Original": "--best_of",
+    "Type": "int",
+    "Description": "Number of candidates when sampling with non-zero temperature (default: 5)",
+    "Value": 5,
+    "DefaultValue": 5,
+    "IsChecked": false
+  },
+  {
+    "Option": "BeamSize",
+    "Original": "--beam_size",
+    "Type": "int",
+    "Description": "Number of beams in beam search, only applicable when temperature is zero (default: 5)",
+    "Value": 5,
+    "DefaultValue": 5,
+    "IsChecked": false
+  },
+  {
+    "Option": "Patience",
+    "Original": "--patience",
+    "Type": "float",
+    "Description": "Optional patience value to use in beam decoding, as in https://arxiv.org/abs/2204.05424, the default (1.0) is equivalent to conventional beam search (default: 2.0)",
+    "Value": 2.0,
+    "DefaultValue": 2.0,
+    "IsChecked": false
+  },
+  {
+    "Option": "LengthPenalty",
+    "Original": "--length_penalty",
+    "Type": "float",
+    "Description": "Optional token length penalty coefficient (alpha) as in https://arxiv.org/abs/1609.08144, uses simple length normalization by default (default: 1.0)",
+    "Value": 1.0,
+    "DefaultValue": 1.0,
+    "IsChecked": false
+  },
+  {
+    "Option": "RepetitionPenalty",
+    "Original": "--repetition_penalty",
+    "Type": "float",
+    "Description": "Penalty applied to the score of previously generated tokens (set > 1.0 to penalize). (default: 1.0)",
+    "Value": 1.0,
+    "DefaultValue": 1.0,
+    "IsChecked": false
+  },
+  {
+    "Option": "NoRepeatNgramSize",
+    "Original": "--no_repeat_ngram_size",
+    "Type": "int",
+    "Description": "Prevent repetitions of ngrams with this size (set 0 to disable). (default: 0)",
+    "Value": 0,
+    "DefaultValue": 0,
+    "IsChecked": false
+  },
+  {
+    "Option": "SuppressBlank",
+    "Original": "--suppress_blank",
+    "Type": "bool",
+    "Description": "Suppress blank outputs at the beginning of the sampling. (default: True)",
+    "Value": true,
+    "DefaultValue": true,
+    "IsChecked": false
+  },
+  {
+    "Option": "SuppressTokens",
+    "Original": "--suppress_tokens",
+    "Type": "string",
+    "Description": "Comma-separated list of token ids to suppress during sampling; '-1' will suppress most special characters except common punctuations. `None` - will pass empty list. (default: -1)",
+    "Value": "-1",
+    "DefaultValue": "-1",
+    "IsChecked": false
+  },
+  {
+    "Option": "InitialPrompt",
+    "Original": "--initial_prompt",
+    "Type": "string",
+    "Description": "Optional text to provide context as a prompt for the first window. Use 'None' to disable it. Note: 'auto' and 'default' are experimental ~universal prompt presets, if task=transcribe then they work only if --language is set. (default: auto)",
+    "Value": "auto",
+    "DefaultValue": "auto",
+    "IsChecked": false
+  },
+  {
+    "Option": "Prefix",
+    "Original": "--prefix",
+    "Type": "string",
+    "Description": "Optional text to provide as a prefix for the first window. A partial transcription for the current audio input. (default: None)",
+    "Value": null,
+    "DefaultValue": null,
+    "IsChecked": false
+  },
+  {
+    "Option": "ConditionOnPreviousText",
+    "Original": "--condition_on_previous_text",
+    "Type": "bool",
+    "Description": "If True, provide the previous output of the model as a prompt for the next window; disabling may make the text inconsistent across windows, but the model becomes less prone to getting stuck in a failure loop. If disabled then you may want to disable --reprompt too. (default: True)",
+    "Value": true,
+    "DefaultValue": true,
+    "IsChecked": false
+  },
+  {
+    "Option": "PromptResetOnTemperature",
+    "Original": "--prompt_reset_on_temperature",
+    "Type": "float",
+    "Description": "Resets prompt if temperature is above this value. Arg has effect only if condition_on_previous_text is True. (default: 0.5)",
+    "Value": 0.5,
+    "DefaultValue": 0.5,
+    "IsChecked": false
+  },
+  {
+    "Option": "WithoutTimestamps",
+    "Original": "--without_timestamps",
+    "Type": "bool",
+    "Description": "Use <|notimestamps|> to sample text tokens only. For audios shorter than 30s. (default: None)",
+    "Value": null,
+    "DefaultValue": null,
+    "IsChecked": false
+  },
+  {
+    "Option": "MaxInitialTimestamp",
+    "Original": "--max_initial_timestamp",
+    "Type": "float",
+    "Description": "The initial timestamp cannot be later than this. (default: 1.0)",
+    "Value": 1.0,
+    "DefaultValue": 1.0,
+    "IsChecked": false
+  },
+  {
+    "Option": "TemperatureIncrementOnFallback",
+    "Original": "--temperature_increment_on_fallback",
+    "Type": "float",
+    "Description": "Temperature to increase when falling back when the decoding fails to meet either of the thresholds below. To disable fallback set it to 'None'. (default: 0.2)",
+    "Value": 0.2,
+    "DefaultValue": 0.2,
+    "IsChecked": false
+  },
+  {
+    "Option": "CompressionRatioThreshold",
+    "Original": "--compression_ratio_threshold",
+    "Type": "float",
+    "Description": "If the gzip compression ratio is higher than this value, treat the decoding as failed (default: 2.4)",
+    "Value": 2.4,
+    "DefaultValue": 2.4,
+    "IsChecked": false
+  },
+  {
+    "Option": "LogprobThreshold",
+    "Original": "--logprob_threshold",
+    "Type": "float",
+    "Description": "If the average log probability is lower than this value, treat the decoding as failed (default: -1.0)",
+    "Value": -1.0,
+    "DefaultValue": -1.0,
+    "IsChecked": false
+  },
+  {
+    "Option": "NoSpeechThreshold",
+    "Original": "--no_speech_threshold",
+    "Type": "float",
+    "Description": "If the probability of the <|nospeech|> token is higher than this value AND the decoding has failed due to 'logprob_threshold', consider the segment as silence (default: 0.6)",
+    "Value": 0.6,
+    "DefaultValue": 0.6,
+    "IsChecked": false
+  },
+  {
+    "Option": "WordTimestamps",
+    "Original": "--word_timestamps",
+    "Type": "bool",
+    "Description": "Extract word-level timestamps and refine the results based on them (default: True)",
+    "Value": true,
+    "DefaultValue": true,
+    "IsChecked": false
+  },
+  {
+    "Option": "HighlightWords",
+    "Original": "--highlight_words",
+    "Type": "bool",
+    "Description": "Underline each word as it is spoken AKA karaoke in srt and vtt output formats. Note: it has no effect with --sentence (default: False)",
+    "Value": false,
+    "DefaultValue": false,
+    "IsChecked": false
+  },
+  {
+    "Option": "PrependPunctuations",
+    "Original": "--prepend_punctuations",
+    "Type": "string",
+    "Description": "If word_timestamps is True, merge these punctuation symbols with the next word (default: \"'“¿([{-)\")",
+    "Value": "'“¿([{-)",
+    "DefaultValue": "'“¿([{-)",
+    "IsChecked": false
+  },
+  {
+    "Option": "AppendPunctuations",
+    "Original": "--append_punctuations",
+    "Type": "string",
+    "Description": "If word_timestamps is True, merge these punctuation symbols with the previous word (default: \"'.。,，!！?？:：”)]}、)\")",
+    "Value": "'.。,，!！?？:：”)]}、)\"",
+    "DefaultValue": "'.。,，!！?？:：”)]}、)\"",
+    "IsChecked": false
+  },
+  {
+    "Option": "Threads",
+    "Original": "--threads",
+    "Type": "int",
+    "Description": "Number of threads used for CPU inference; By default number of the real cores but no more that 4 (default: 0)",
+    "Value": 0,
+    "DefaultValue": 0,
+    "IsChecked": false
+  },
+  {
+    "Option": "Version",
+    "Original": "--version",
+    "Type": "bool",
+    "Description": "Show Faster-Whisper's version number",
+    "Value": false,
+    "DefaultValue": false,
+    "IsChecked": false
+  },
+  {
+    "Option": "VadFilter",
+    "Original": "--vad_filter",
+    "Type": "bool",
+    "Description": "Enable the voice activity detection (VAD) to filter out parts of the audio without speech. (default: True)",
+    "Value": true,
+    "DefaultValue": true,
+    "IsChecked": false
+  },
+  {
+    "Option": "VadThreshold",
+    "Original": "--vad_threshold",
+    "Type": "float",
+    "Description": "Probabilities above this value are considered as speech. (default: 0.45)",
+    "Value": 0.45,
+    "DefaultValue": 0.45,
+    "IsChecked": false
+  },
+  {
+    "Option": "VadMinSpeechDurationMs",
+    "Original": "--vad_min_speech_duration_ms",
+    "Type": "int",
+    "Description": "Final speech chunks shorter min_speech_duration_ms are thrown out. (default: 250)",
+    "Value": 250,
+    "DefaultValue": 250,
+    "IsChecked": false
+  },
+  {
+    "Option": "VadMaxSpeechDurationS",
+    "Original": "--vad_max_speech_duration_s",
+    "Type": "float",
+    "Description": "Maximum duration of speech chunks in seconds. Longer will be split at the timestamp of the last silence. (default: None)",
+    "Value": null,
+    "DefaultValue": null,
+    "IsChecked": false
+  },
+  {
+    "Option": "VadMinSilenceDurationMs",
+    "Original": "--vad_min_silence_duration_ms",
+    "Type": "int",
+    "Description": "In the end of each speech chunk time to wait before separating it. (default: 3000)",
+    "Value": 3000,
+    "DefaultValue": 3000,
+    "IsChecked": false
+  },
+  {
+    "Option": "VadSpeechPadMs",
+    "Original": "--vad_speech_pad_ms",
+    "Type": "int",
+    "Description": "Final speech chunks are padded by speech_pad_ms each side. (default: 900)",
+    "Value": 900,
+    "DefaultValue": 900,
+    "IsChecked": false
+  },
+  {
+    "Option": "VadWindowSizeSamples",
+    "Original": "--vad_window_size_samples",
+    "Type": "int",
+    "Description": "Size of audio chunks fed to the silero VAD model. Values other than 512, 1024, 1536 may affect model performance!!! (default: 1536)",
+    "Value": 1536,
+    "DefaultValue": 1536,
+    "IsChecked": false
+  },
+  {
+    "Option": "VadMethod",
+    "Original": "--vad_method",
+    "Type": "string",
+    "Description": "Read there - 'https://github.com/Purfview/whisper-standalone-win/discussions/231'. (default: silero_v4_fw)",
+    "Value": "silero_v4_fw",
+    "DefaultValue": "silero_v4_fw",
+    "IsChecked": false
+  },
+  {
+    "Option": "VadDump",
+    "Original": "--vad_dump",
+    "Type": "bool",
+    "Description": "Dumps VAD timings to a subtitle file for inspection. Additionally dumps various intermediate audio files for debug. (default: False)",
+    "Value": false,
+    "DefaultValue": false,
+    "IsChecked": false
+  },
+  {
+    "Option": "VadDumpAud",
+    "Original": "--vad_dump_aud",
+    "Type": "bool",
+    "Description": "Additional arg for --vad_dump, collected chunks as audio. (default: False)",
+    "Value": false,
+    "DefaultValue": false,
+    "IsChecked": false
+  },
+  {
+    "Option": "VadDevice",
+    "Original": "--vad_device",
+    "Type": "string",
+    "Description": "Device to use for pyannote_v3/pyannote_onnx_v3 VAD. Default is 'cuda' if CUDA device is detected, else is 'cpu'. If CUDA GPU is a second device then set 'cuda:1'. (default: cuda)",
+    "Value": "cuda",
+    "DefaultValue": "cuda",
+    "IsChecked": false
+  },
+  {
+    "Option": "HallucinationSilenceThreshold",
+    "Original": "--hallucination_silence_threshold",
+    "Type": "float",
+    "Description": "(Experimental) When word_timestamps is True, skip silent periods longer than this threshold (in seconds) when a possible hallucination is detected. Optimal value is somewhere between 2 - 8 seconds. Inactive if None. (default: None)",
+    "Value": null,
+    "DefaultValue": null,
+    "IsChecked": false
+  },
+  {
+    "Option": "HallucinationSilenceThTemp",
+    "Original": "--hallucination_silence_th_temp",
+    "Type": "float",
+    "Description": "(Experimental) Additional heuristic for '--hallucination_silence_threshold'. If temperature is higher than this threshold then consider segment as possible hallucination ignoring the hst score. Inactive if 1.0. (default: 1.0)",
+    "Value": 1.0,
+    "DefaultValue": 1.0,
+    "IsChecked": false
+  },
+  {
+    "Option": "ClipTimestamps",
+    "Original": "--clip_timestamps",
+    "Type": "string",
+    "Description": "Comma-separated list start,end,start,end,... timestamps (in seconds) of clips to process. The last end timestamp defaults to the end of the file. VAD is auto-disabled. (default: 0)",
+    "Value": "0",
+    "DefaultValue": "0",
+    "IsChecked": false
+  },
+  {
+    "Option": "MaxNewTokens",
+    "Original": "--max_new_tokens",
+    "Type": "int",
+    "Description": "Maximum number of new tokens to generate per-chunk. (default: None)",
+    "Value": null,
+    "DefaultValue": null,
+    "IsChecked": false
+  },
+  {
+    "Option": "ChunkLength",
+    "Original": "--chunk_length",
+    "Type": "float",
+    "Description": "The length of audio segments. If it is not None, it will overwrite the default chunk_length of the FeatureExtractor. (default: None)",
+    "Value": null,
+    "DefaultValue": null,
+    "IsChecked": false
+  },
+  {
+    "Option": "Hotwords",
+    "Original": "--hotwords",
+    "Type": "string",
+    "Description": "Pass hint words/phrases to the model. Similar as --reprompt except that it unsafely cuts into the new tokens space when reprompt safely cuts into the context tokens space. Has no effect if --prefix is not None. (default: None)",
+    "Value": null,
+    "DefaultValue": null,
+    "IsChecked": false
+  },
+  {
+    "Option": "Batched",
+    "Original": "--batched",
+    "Type": "bool",
+    "Description": "Enables batched inference mode - transcribes audio in batched VAD's chunks. Can increase speed ~2x-4x but will decrease transcription quality. Many options don't work in this mode. (default: False)",
+    "Value": false,
+    "DefaultValue": false,
+    "IsChecked": false
+  },
+  {
+    "Option": "BatchSize",
+    "Original": "--batch_size",
+    "Type": "int",
+    "Description": "When using batched inference it sets the maximum number of parallel requests to model for decoding. (default: 8)",
+    "Value": 8,
+    "DefaultValue": 8,
+    "IsChecked": false
+  },
+  {
+    "Option": "Multilingual",
+    "Original": "--multilingual",
+    "Type": "bool",
+    "Description": "Perform language detection on every segment. (default: False)",
+    "Value": false,
+    "DefaultValue": false,
+    "IsChecked": false
+  },
+  {
+    "Option": "ModelPreload",
+    "Original": "--model_preload",
+    "Type": "bool?",
+    "Description": "True: faster-whisper model is preloaded before iteration on audio, but interferes with '--ff_mdx_kim2' model. False: Runs inside iteration after '--ff...' filters. None: automatic, it's default, False if 'ff_mdx_kim2' or 'diarize_only' is enabled. (default: None)",
+    "Value": null,
+    "DefaultValue": null,
+    "IsChecked": false
+  },
+  {
+    "Option": "BatchRecursive",
+    "Original": "--batch_recursive",
+    "Type": "bool",
+    "Description": "Enables recursive batch files processing. Note: If set then it changes defaults of --output_dir. (default: False)",
+    "Value": false,
+    "DefaultValue": false,
+    "IsChecked": false
+  },
+  {
+    "Option": "BeepOff",
+    "Original": "--beep_off",
+    "Type": "bool",
+    "Description": "Disables the beep sound when operation is finished. (default: False)",
+    "Value": false,
+    "DefaultValue": false,
+    "IsChecked": false
+  },
+  {
+    "Option": "Skip",
+    "Original": "--skip",
+    "Type": "bool",
+    "Description": "Skips media file if subtitle exists. Works if input is wildcard or directory. Note: Checks for the first format in the list of --output_format. (default: False)",
+    "Value": false,
+    "DefaultValue": false,
+    "IsChecked": false
+  },
+  {
+    "Option": "Checkcuda",
+    "Original": "--checkcuda",
+    "Type": "bool",
+    "Description": "Returns CUDA device count. (for Subtitle Edit's internal use)",
+    "Value": false,
+    "DefaultValue": false,
+    "IsChecked": false
+  },
+  {
+    "Option": "PrintProgress",
+    "Original": "--print_progress",
+    "Type": "bool",
+    "Description": "Prints progress bar instead of transcription. (default: False)",
+    "Value": false,
+    "DefaultValue": false,
+    "IsChecked": false
+  },
+  {
+    "Option": "Postfix",
+    "Original": "--postfix",
+    "Type": "bool",
+    "Description": "Adds language as a postfix to subtitle's filename. (default: False)",
+    "Value": false,
+    "DefaultValue": false,
+    "IsChecked": false
+  },
+  {
+    "Option": "CheckFiles",
+    "Original": "--check_files",
+    "Type": "bool",
+    "Description": "Checks input files for errors before passing all them for transcription. Works if input is wildcard or directory. (default: False)",
+    "Value": false,
+    "DefaultValue": false,
+    "IsChecked": false
+  },
+  {
+    "Option": "AltWriterOff",
+    "Original": "--alt_writer_off",
+    "Type": "bool",
+    "Description": "(For dev experiments) Forcefully disables alternative subs writer func. (default: False)",
+    "Value": false,
+    "DefaultValue": false,
+    "IsChecked": false
+  },
+  {
+    "Option": "IgnoreDupePrompt",
+    "Original": "--ignore_dupe_prompt",
+    "Type": "int",
+    "Description": "PR163 aka don't add dupes to prompt. Reduces possibility of the hallucination loops. Sets how deep to look for dupes in the segments. 0 - Disabled. (default: 2)",
+    "Value": 2,
+    "DefaultValue": 2,
+    "IsChecked": false
+  },
+  {
+    "Option": "HallucinationsListOff",
+    "Original": "--hallucinations_list_off",
+    "Type": "bool",
+    "Description": "Disables hallucinations_list, allows known hallucinations to be added to prompt. (default: False)",
+    "Value": false,
+    "DefaultValue": false,
+    "IsChecked": false
+  },
+  {
+    "Option": "V3OffsetsOff",
+    "Original": "--v3_offsets_off",
+    "Type": "bool",
+    "Description": "Disables custom offsets to the defaults of pseudo-vad thresholds when 'large-v3' models are in use. Note: Offsets made to combat 'large-v3' hallucinations. (default: False)",
+    "Value": false,
+    "DefaultValue": false,
+    "IsChecked": false
+  },
+  {
+    "Option": "Reprompt",
+    "Original": "--reprompt",
+    "Type": "bool",
+    "Description": "Ensures that initial_prompt is present in prompt for all windows/chunks. Has no effect if initial_prompt is None. (default: True)",
+    "Value": true,
+    "DefaultValue": true,
+    "IsChecked": false
+  },
+  {
+    "Option": "PromptResetOnNoEnd",
+    "Original": "--prompt_reset_on_no_end",
+    "Type": "int",
+    "Description": "Resets prompt if there is no end of sentence in window/chunk. 0 - disabled, 1 - looks for period, 2 - looks for period or comma. Note: it's auto-disabled if reprompt is False and if hotwords is None. (default: 2)",
+    "Value": 2,
+    "DefaultValue": 2,
+    "IsChecked": false
+  },
+  {
+    "Option": "Rehot",
+    "Original": "--rehot",
+    "Type": "bool",
+    "Description": "For Dev experiments. Just to transfer the auto prompt preset to the hotwords routines. (default: False)",
+    "Value": false,
+    "DefaultValue": false,
+    "IsChecked": false
+  },
+  {
+    "Option": "Unmerged",
+    "Original": "--unmerged",
+    "Type": "bool",
+    "Description": "Experimental arg for batched inference. Runs unmerged segments instead of merged, very slow. Possible cons: further decrease of batched transcription quality. Possible pros: more accurate timestamps, less hallucinations, not missing sentences, positive effect with --multilingual. (default: False)",
+    "Value": false,
+    "DefaultValue": false,
+    "IsChecked": false
+  },
+  {
+    "Option": "Japanese",
+    "Original": "--japanese",
+    "Type": "string",
+    "Description": "This option may steer Japanese output to have a more preferred writing style. (default: blend)",
+    "Value": "blend",
+    "DefaultValue": "blend",
+    "IsChecked": false
+  },
+  {
+    "Option": "OneWord",
+    "Original": "--one_word",
+    "Type": "int",
+    "Description": "0) Disabled. 1) Outputs srt and vtt subtitles with one word per line. 2) As '1', plus removes whitespace and ensures >= 50ms for sub lines. Note: VAD may slightly reduce the accuracy of timestamps on some lines. (default: 0)",
+    "Value": 0,
+    "DefaultValue": 0,
+    "IsChecked": false
+  },
+  {
+    "Option": "StandardAsia",
+    "Original": "--standard_asia",
+    "Type": "bool",
+    "Description": "Quick hardcoded preset to split lines in standard way for some Asian languages. --max_line_width=16, --max_line_count=2, --max_comma_cent=80 and --sentence are activated automatically. (default: False)",
+    "Value": false,
+    "DefaultValue": false,
+    "IsChecked": false
+  },
+  {
+    "Option": "MaxCommaCent",
+    "Original": "--max_comma_cent",
+    "Type": "int",
+    "Description": "(requires --sentence) Percentage of --max_line_width when it starts breaking the line after comma. Note: 100 = disabled. (default: 100)",
+    "Requires": [
+      {
+        "Option": "Sentence",
+        "DefaultValue": true
+      }
+    ],
+    "Value": 100,
+    "DefaultValue": 100,
+    "IsChecked": false
+  },
+  {
+    "Option": "MaxGap",
+    "Original": "--max_gap",
+    "Type": "float",
+    "Description": "(requires --sentence) Threshold for a gap length in seconds, longer gaps are treated as dots. (default: 3.0)",
+    "Requires": [
+      {
+        "Option": "Sentence",
+        "DefaultValue": true
+      }
+    ],
+    "Value": 3.0,
+    "DefaultValue": 3.0,
+    "IsChecked": false
+  },
+  {
+    "Option": "MaxLineWidth",
+    "Original": "--max_line_width",
+    "Type": "int",
+    "Description": "The maximum number of characters in a line before breaking the line. Note: It works with `--sentence` too. (default: 1000)",
+    "Value": 1000,
+    "DefaultValue": 1000,
+    "IsChecked": false
+  },
+  {
+    "Option": "MaxLineCount",
+    "Original": "--max_line_count",
+    "Type": "int",
+    "Description": "The maximum number of lines in one sub segment. Note: It works with `--sentence` too. (default: 1)",
+    "Value": 1,
+    "DefaultValue": 1,
+    "IsChecked": false
+  },
+  {
+    "Option": "MinDistToEnd",
+    "Original": "--min_dist_to_end",
+    "Type": "int",
+    "Description": "(requires --sentence) If from words like 'the', 'Mr.' and etc. to the end of line distance is less than set then it starts in a new line. Note: 0 = disabled. (default: 0)",
+    "Requires": [
+      {
+        "Option": "Sentence",
+        "DefaultValue": true
+      }
+    ],
+    "Value": 0,
+    "DefaultValue": 0,
+    "IsChecked": false
+  },
+  {
+    "Option": "FfDump",
+    "Original": "--ff_dump",
+    "Type": "bool",
+    "Description": "Dumps pre-processed audio by the filters to the 16000Hz file and prevents deletion of some intermediate audio files. (default: False)",
+    "Value": false,
+    "DefaultValue": false,
+    "IsChecked": false
+  },
+  {
+    "Option": "FfTrack",
+    "Original": "--ff_track",
+    "Type": "int",
+    "Description": "Audio track selector. 1 - selects the first audio track. (default: 1)",
+    "Value": 1,
+    "DefaultValue": 1,
+    "IsChecked": false
+  },
+  {
+    "Option": "FfFc",
+    "Original": "--ff_fc",
+    "Type": "bool",
+    "Description": "Selects only front-center channel (FC) to process. (default: False)",
+    "Value": false,
+    "DefaultValue": false,
+    "IsChecked": false
+  },
+  {
+    "Option": "FfLc",
+    "Original": "--ff_lc",
+    "Type": "bool",
+    "Description": "Selects only a left channel to process. Useful if audio contains inverted polarity content, for example a narration. (default: False)",
+    "Value": false,
+    "DefaultValue": false,
+    "IsChecked": false
+  },
+  {
+    "Option": "FfInvert",
+    "Original": "--ff_invert",
+    "Type": "bool",
+    "Description": "Inverts polarity a left channel and mix audio to mono, to keep inverted polarity content and delete same signal in the channels. Useful if audio contains inverted polarity content. (default: False)",
+    "Value": false,
+    "DefaultValue": false,
+    "IsChecked": false
+  },
+  {
+    "Option": "FfMp3",
+    "Original": "--ff_mp3",
+    "Type": "bool",
+    "Description": "Audio filter: Conversion to MP3 and back. (default: False)",
+    "Value": false,
+    "DefaultValue": false,
+    "IsChecked": false
+  },
+  {
+    "Option": "FfSync",
+    "Original": "--ff_sync",
+    "Type": "bool",
+    "Description": "Audio filter: Stretch/squeeze samples to the given timestamps, with a maximum of 3600 samples per second compensation. Input file must be container that support storing PTS like mp4, mkv... (default: False)",
+    "Value": false,
+    "DefaultValue": false,
+    "IsChecked": false
+  },
+  {
+    "Option": "FfRnndnSh",
+    "Original": "--ff_rnndn_sh",
+    "Type": "bool",
+    "Description": "Audio filter: Suppress non-speech with GregorR's SH model using Recurrent Neural Networks. Notes: It's more aggressive than Xiph, discards singing. (default: False)",
+    "Value": false,
+    "DefaultValue": false,
+    "IsChecked": false
+  },
+  {
+    "Option": "FfRnndnXiph",
+    "Original": "--ff_rnndn_xiph",
+    "Type": "bool",
+    "Description": "Audio filter: Suppress non-speech with Xiph's original model using Recurrent Neural Networks. (default: False)",
+    "Value": false,
+    "DefaultValue": false,
+    "IsChecked": false
+  },
+  {
+    "Option": "FfFftdn",
+    "Original": "--ff_fftdn",
+    "Type": "int",
+    "Description": "Audio filter: General denoise with Fast Fourier Transform. Notes: 12 - normal strength, 0 - disabled. (default: 0)",
+    "Value": 0,
+    "DefaultValue": 0,
+    "IsChecked": false
+  },
+  {
+    "Option": "FfTempo",
+    "Original": "--ff_tempo",
+    "Type": "float",
+    "Description": "Audio filter: Adjust audio tempo. Values below 1.0 slows down audio, above - speeds up. 1.0 = disabled. (default: 1.0)",
+    "Value": 1.0,
+    "DefaultValue": 1.0,
+    "IsChecked": false
+  },
+  {
+    "Option": "FfGate",
+    "Original": "--ff_gate",
+    "Type": "bool",
+    "Description": "Audio filter: Reduce lower parts of a signal. (default: False)",
+    "Value": false,
+    "DefaultValue": false,
+    "IsChecked": false
+  },
+  {
+    "Option": "FfSpeechnorm",
+    "Original": "--ff_speechnorm",
+    "Type": "bool",
+    "Description": "Audio filter: Extreme and fast speech amplification. (default: False)",
+    "Value": false,
+    "DefaultValue": false,
+    "IsChecked": false
+  },
+  {
+    "Option": "FfLoudnorm",
+    "Original": "--ff_loudnorm",
+    "Type": "bool",
+    "Description": "Audio filter: EBU R128 loudness normalization. (default: False)",
+    "Value": false,
+    "DefaultValue": false,
+    "IsChecked": false
+  },
+  {
+    "Option": "FfSilenceSuppress",
+    "Original": "--ff_silence_suppress",
+    "Type": "string",
+    "Description": "Audio filter: Suppress quiet parts of audio. Takes two values. First value - noise tolerance in decibels [-70 - 0] (0=disabled), second value - minimum silence duration in seconds [0.1 - 10]. (default: [0, 3.0])",
+    "Value": "[0, 3.0]",
+    "DefaultValue": "[0, 3.0]",
+    "IsChecked": false
+  },
+  {
+    "Option": "FfLowhighpass",
+    "Original": "--ff_lowhighpass",
+    "Type": "bool",
+    "Description": "Audio filter: Pass 50Hz - 7800 band. sinc + afir. (default: False)",
+    "Value": false,
+    "DefaultValue": false,
+    "IsChecked": false
+  },
+  {
+    "Option": "FfMdxKim2",
+    "Original": "--ff_mdx_kim2",
+    "Type": "bool",
+    "Description": "Audio filter: High quality vocals extraction. MDX-Net 'Kim_Vocal_2' model made by KimberleyJensen. Notes: It's better than 'HT Demucs v4 FT', first in the filters chain, recommended to use on movies and series. (default: False)",
+    "Value": false,
+    "DefaultValue": false,
+    "IsChecked": false
+  },
+  {
+    "Option": "MdxChunk",
+    "Original": "--mdx_chunk",
+    "Type": "int",
+    "Description": "Chunk size in seconds for MDX-Net filter. Notes: Smaller is using less memory, but can be slower and produce a bit lower quality. (default: 15)",
+    "Value": 15,
+    "DefaultValue": 15,
+    "IsChecked": false
+  },
+  {
+    "Option": "MdxDevice",
+    "Original": "--mdx_device",
+    "Type": "string",
+    "Description": "Device to use for MDX-Net filter. Default is 'cuda' if CUDA device is detected, else is 'cpu'. If CUDA GPU is a second device then set 'cuda:1'. (default: cuda)",
+    "Value": "cuda",
+    "DefaultValue": "cuda",
+    "IsChecked": false
+  },
+  {
+    "Option": "Diarize",
+    "Original": "--diarize",
+    "Type": "string",
+    "Description": "Notes: It will activate --sentence and all output formats will be affected, except json. Read more there - 'https://github.com/Purfview/whisper-standalone-win/discussions/322'. (default: None)",
+    "Value": null,
+    "DefaultValue": null,
+    "IsChecked": false
+  },
+  {
+    "Option": "DiarizeDevice",
+    "Original": "--diarize_device",
+    "Type": "string",
+    "Description": "Device to use for '--diarize'. Default is 'cuda' if CUDA device is detected, else is 'cpu'. If CUDA GPU is a second device then set 'cuda:1'. (default: cuda)",
+    "Value": "cuda",
+    "DefaultValue": "cuda",
+    "IsChecked": false
+  },
+  {
+    "Option": "DiarizeThreads",
+    "Original": "--diarize_threads",
+    "Type": "int",
+    "Description": "Automatic by default. (default: 0)",
+    "Value": 0,
+    "DefaultValue": 0,
+    "IsChecked": false
+  },
+  {
+    "Option": "DiarizeDump",
+    "Original": "--diarize_dump",
+    "Type": "bool",
+    "Description": "Dump diarization output to a file. Note: No need to set when '--diarize_only'. (default: False)",
+    "Value": false,
+    "DefaultValue": false,
+    "IsChecked": false
+  },
+  {
+    "Option": "Speaker",
+    "Original": "--speaker",
+    "Type": "string",
+    "Description": "Diarization: To replace 'SPEAKER' string with your own word. (default: SPEAKER)",
+    "Value": "SPEAKER",
+    "DefaultValue": "SPEAKER",
+    "IsChecked": false
+  },
+  {
+    "Option": "NumSpeakers",
+    "Original": "--num_speakers",
+    "Type": "int",
+    "Description": "Diarization: Number of speakers, when known. (default: None)",
+    "Value": null,
+    "DefaultValue": null,
+    "IsChecked": false
+  },
+  {
+    "Option": "MinSpeakers",
+    "Original": "--min_speakers",
+    "Type": "int",
+    "Description": "Diarization: Minimum number of speakers. Has no effect when `num_speakers` is provided. (default: None)",
+    "Value": null,
+    "DefaultValue": null,
+    "IsChecked": false
+  },
+  {
+    "Option": "MaxSpeakers",
+    "Original": "--max_speakers",
+    "Type": "int",
+    "Description": "Diarization: Maximum number of speakers. Has no effect when `num_speakers` is provided. (default: None)",
+    "Value": null,
+    "DefaultValue": null,
+    "IsChecked": false
+  },
+  {
+    "Option": "DiarizeFf",
+    "Original": "--diarize_ff",
+    "Type": "bool?",
+    "Description": "True: diarize after '--ff_...' audio filters, but runs inside iteration and interferes with FW model if '--model_preload' is True. False: diarize all files before anything else. None: automatic, it's default, True if any 'ff' filter is enabled. (default: None)",
+    "Value": null,
+    "DefaultValue": null,
+    "IsChecked": false
+  },
+  {
+    "Option": "ReturnEmbeddings",
+    "Original": "--return_embeddings",
+    "Type": "bool",
+    "Description": "Dump diarization embeddings to the files. Get one embedding per speaker. (default: False)",
+    "Value": false,
+    "DefaultValue": false,
+    "IsChecked": false
+  },
+  {
+    "Option": "DiarizeOnly",
+    "Original": "--diarize_only",
+    "Type": "bool",
+    "Description": "Use if you want to do diarizations without transcription. Note: No need to set '--diarize_dump'. (default: False)",
+    "Value": false,
+    "DefaultValue": false,
+    "IsChecked": false
+  }
+]

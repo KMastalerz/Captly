@@ -6,15 +6,8 @@ using static captly.MainWindowCommands;
 
 namespace captly;
 
-public class MainWindowViewModel : BaseViewModel
+public class MainWindowViewModel() : BaseViewModel
 {
-    public MainWindowViewModel()
-    {
-        OpenDrawerCommand = new OpenDrawerCommand();
-        OpenTranslationCommand = new OpenTranslationCommand();
-        OpenTranscriptionCommand = new OpenTranscriptionCommand();
-    }
-
     private UserControl? view = null;
     public UserControl? View
     {
@@ -42,13 +35,6 @@ public class MainWindowViewModel : BaseViewModel
         set => SetProperty(ref isSnackbarActive, value);
     }
 
-    private bool isDrawerOpen = false;
-    public bool IsDrawerOpen
-    {
-        get => isDrawerOpen;
-        set => SetProperty(ref isDrawerOpen, value);
-    }
-
     private Style? snackbarStyle;
     public Style? SnackbarStyle
     {
@@ -56,7 +42,7 @@ public class MainWindowViewModel : BaseViewModel
         set => SetProperty(ref snackbarStyle, value);
     }
 
-    public ICommand OpenDrawerCommand { get; }
-    public ICommand OpenTranslationCommand { get; }
-    public ICommand OpenTranscriptionCommand { get; }
+    public ICommand OpenTranslationCommand { get; } = new OpenTranslationCommand();
+    public ICommand OpenTranscriptionCommand { get; } = new OpenTranscriptionCommand();
+    public ICommand OpenWhisperOptionsSetupCommand { get; } = new OpenWhisperOptionsSetupCommand();
 }

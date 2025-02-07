@@ -14,17 +14,22 @@ public class TranslationViewModel: BaseViewModel
 
         name = cacheTranslation.Name;
         path = cacheTranslation.Path;
+        extension = cacheTranslation.Extension;
+        fileSize = cacheTranslation.FileSize;
         status = cacheTranslation.Status;
         requestCount = cacheTranslation.RequestCount;
         failedRequestCount = cacheTranslation.FailedRequestCount;
-        inputTokenCount = cacheTranslation.InputTokenCount;
-        outputTokenCount = cacheTranslation.OutputTokenCount;
         progress = cacheTranslation.Progress;
         translationSetup = cacheTranslation.TranslationSetup;
-        encoding = cacheTranslation.Encoding;
+
+        using (var reader = new StreamReader($"{path}\\{name}{extension}", Encoding.Default, true))
+        {
+            encoding = reader.CurrentEncoding;
+        }
 
         string appDirectory = AppDomain.CurrentDomain.BaseDirectory;
         string tempDirectory = System.IO.Path.Combine(appDirectory, "Temp");
+        tempDirectory = System.IO.Path.Combine(appDirectory, "Translations");
 
         if (File.Exists(tempDirectory))
         {
@@ -36,14 +41,15 @@ public class TranslationViewModel: BaseViewModel
 
     private string name = default!;
     private string path = default!;
-    private TranslationStatus status = default!;
+    private string extension = default!;
+    private long fileSize = default!;
     private int requestCount = 0;
     private int failedRequestCount = 0;
-    private int inputTokenCount = 0;
-    private int outputTokenCount = 0;
     private int progress = 0;
+    private TranslationStatus status = default!;
     private TranslationSetup translationSetup = default!;
     private Encoding encoding = Encoding.UTF8;
+    private CancellationTokenSource? cancellationTokenSource;
 
     public string Name
     {
@@ -55,10 +61,15 @@ public class TranslationViewModel: BaseViewModel
         get => path;
         set => SetProperty(ref path, value);
     }
-    public TranslationStatus Status
+    public string Extension
     {
-        get => status;
-        set => SetProperty(ref status, value);
+        get => extension;
+        set => SetProperty(ref extension, value);
+    }
+    public long FileSize
+    {
+        get => fileSize;
+        set => SetProperty(ref fileSize, value);
     }
     public int RequestCount
     {
@@ -70,20 +81,15 @@ public class TranslationViewModel: BaseViewModel
         get => failedRequestCount;
         set => SetProperty(ref failedRequestCount, value);
     }
-    public int InputTokenCount
-    {
-        get => inputTokenCount;
-        set => SetProperty(ref inputTokenCount, value);
-    }
-    public int OutputTokenCount
-    {
-        get => outputTokenCount;
-        set => SetProperty(ref outputTokenCount, value);
-    }
     public int Progress
     {
         get => progress;
         set => SetProperty(ref progress, value);
+    }
+    public TranslationStatus Status
+    {
+        get => status;
+        set => SetProperty(ref status, value);
     }
     public TranslationSetup TranslationSetup
     {
@@ -95,5 +101,15 @@ public class TranslationViewModel: BaseViewModel
     {
         get => encoding;
         set => SetProperty(ref encoding, value);
+    }
+    public CancellationTokenSource? CancellationTokenSource
+    {
+        get => cancellationTokenSource;
+        set => SetProperty(ref cancellationTokenSource, value);
+    }
+
+    public void CancelTranslation()
+    {
+        CancellationTokenSource?.Cancel();
     }
 }

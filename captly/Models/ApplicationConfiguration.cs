@@ -14,22 +14,21 @@ public class TranscriptionSetup
     public bool ArchiveOldFile { get; set; } = false;
     public string OldVersionPath { get; set; } = default!;
     public string NewVersionPath { get; set; } = default!;
-    public string Model { get; set; } = "turbo";
-    public string? SourceLanguage { get; set; } = null;
-    public int MaxLineWidth { get; set; } = 42;
-    public int MaxLineCount { get; set; } = 2;
-    public int SubtitleRequestCount { get; set; } = 15;
-    public int CachedMessageCount { get; set; } = 3;
     public string CustomConfiguration {  get; set; } = default!;
+    public bool MoveToTranslationAfterFinish { get; set; } = true;
 }
 
 public class TranslationSetup
 {
-    public string OpenAiApiKey { get; set; } = default!;
-    public string OpenAiApiModel { get; set; } = default!;
-    public string DefaultLanguage { get; set; } = "Polish";
     public bool OverriteFile { get; set; } = true;
     public bool ArchiveOldFile { get; set; } = false;
     public string OldVersionPath { get; set; } = default!;
     public string NewVersionPath { get; set; } = default!;
+    public bool RunOllama {  get; set; } = false;
+    public bool RunOpenAiApi { get; set; } = true;
+    public string OpenAiApiKey { get; set; } = "";
+    public string ModelName { get; set; } = "deepseek-r1:8b";
+    public string DefaultLanguage { get; set; } = "Polish";
+    public int SubtitleRequestCount { get; set; } = 15;
+    public int RetryCount { get; set; } = 3;
 }

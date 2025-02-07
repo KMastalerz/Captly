@@ -1,7 +1,9 @@
-﻿using captly.Models;
+﻿using captly.Interfaces;
+using captly.Models;
 using captly.Services;
 using captly.Views.Transcription;
 using captly.Views.Translation;
+using captly.Views.WhisperOptionsSetup;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.IO;
@@ -64,8 +66,13 @@ public partial class App : Application
 
     private void ConfigureServices(ServiceCollection services)
     {
+        services.AddSingleton<IAppConfigurationService, AppConfigurationService>();
         services.AddSingleton<ICacheService, CacheService>();
+        services.AddSingleton<ISubtitileService, SubtitileService>();
         services.AddSingleton<ITranscriptionService, TranscriptionService>();
+        services.AddSingleton<ITranslationService, TranslationService>();
+
+        services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
     }
 
     private void ConfigureViewModels(ServiceCollection services)
@@ -73,6 +80,7 @@ public partial class App : Application
         services.AddSingleton<MainWindowViewModel>();
         services.AddSingleton<TranslationListViewModel>();
         services.AddSingleton<TranscriptionListViewModel>();
+        services.AddSingleton<WhisperOptionsSetupViewModel>();
     }
 
     private void ConfigureViews(ServiceCollection services)
@@ -80,5 +88,6 @@ public partial class App : Application
         services.AddSingleton<MainWindow>();
         services.AddSingleton<TranslationList>();
         services.AddSingleton<TranscriptionList>();
+        services.AddSingleton<WhisperOptionsSetup>();
     }
 }

@@ -10,6 +10,7 @@
             <converters:TimeSpanConverter x:Key="TimeSpanConverter"/>
             <converters:NullToBooleanConverter x:Key="NullToBooleanConverter"/>
             <converters:FileSizeConverter x:Key="FileSizeConverter"/>
+            <converters:StatusToTranslateVisibilityConverter x:Key="StatusToTranslateVisibilityConverter"/>
             <converters:StatusToTranscribeVisibilityConverter x:Key="StatusToTranscribeVisibilityConverter"/>
             <converters:StatusToStopVisibilityConverter x:Key="StatusToStopVisibilityConverter"/>
             <converters:StatusToRemoveVisibilityConverter x:Key="StatusToRemoveVisibilityConverter"/>

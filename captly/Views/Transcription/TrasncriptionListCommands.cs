@@ -12,9 +12,6 @@ public class TrasncriptionListCommands
 {
     public class TranscribeCommand(TranscriptionListViewModel transcriptionListViewModel) : AsyncCommand
     {
-
-        public event EventHandler? CanExecuteChanged;
-
         public override bool CanExecute(object? parameter = null)
         {
             return !transcriptionListViewModel.TranscriptionFiles.Any(t => t.Status == TranscriptionStatus.Transcribing);
@@ -38,7 +35,6 @@ public class TrasncriptionListCommands
             }
         }
     }
-
     public class SelectFilesCommand() : ICommand
     {
         public event EventHandler? CanExecuteChanged;
@@ -100,7 +96,6 @@ public class TrasncriptionListCommands
             }
         }
     }
-
     public class StopCommand() : ICommand
     {
         public event EventHandler? CanExecuteChanged;
@@ -123,7 +118,6 @@ public class TrasncriptionListCommands
             }  
         }
     }
-
     public class RemoveCommand : ICommand
     {
         public event EventHandler? CanExecuteChanged;

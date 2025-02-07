@@ -13,6 +13,9 @@
     <Compile Update="Views\Translation\TranslationList.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\WhisperOptionsSetup\WhisperOptionsSetup.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="MainWindow.xaml">
@@ -22,6 +25,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Translation\TranslationList.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\WhisperOptionsSetup\WhisperOptionsSetup.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

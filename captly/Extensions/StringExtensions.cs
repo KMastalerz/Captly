@@ -35,4 +35,22 @@ public static class StringExtensions
 
         return new TimeSpan(h, m, 0) + TimeSpan.FromSeconds(s);
     }
+
+    public static string ExtrapolateJson(this string text)
+    {
+        // Define a regular expression pattern to match JSON objects
+        string pattern = @"\[[\s\S]*\]";
+
+        // Use Regex.Match without needing to change regex options
+        Match match = Regex.Match(text, pattern);
+
+        if (match.Success)
+        {
+            return match.Value;
+        }
+        else
+        {
+            return text;
+        }
+    }
 }

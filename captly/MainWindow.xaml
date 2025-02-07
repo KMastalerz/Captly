@@ -9,72 +9,7 @@
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance Type=local:MainWindowViewModel, IsDesignTimeCreatable=False}"
         Title="Captly" Height="650" Width="1200">
-    <materialDesign:DrawerHost BorderBrush="{DynamicResource MaterialDesignDivider}"
-                           VerticalAlignment="Stretch"
-                           IsLeftDrawerOpen="{Binding IsDrawerOpen, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
-        <materialDesign:DrawerHost.LeftDrawerContent>
-            <Grid Width="200">
-                <StackPanel>
-                    <Button Style="{StaticResource MaterialDesignFlatButton}"
-                        Command="{Binding OpenTranslationCommand}"
-                        CommandParameter="{Binding}"
-                        Padding="12 0 12 0"
-                        Foreground="Black"
-                        FontWeight="Normal"
-                        Margin="8 4">
-                        <StackPanel Orientation="Horizontal"
-                                 Width="200">
-                            <materialDesign:PackIcon Kind="Translate"
-                                                 Padding="0"
-                                                 Margin="0"
-                                                 VerticalAlignment="Center">
-
-                            </materialDesign:PackIcon>
-                            <TextBlock VerticalAlignment="Center"
-                                   Margin="8 0 0 0">Translate</TextBlock>
-                        </StackPanel>
-                    </Button>
-                    <Button Style="{StaticResource MaterialDesignFlatButton}"
-                        Command="{Binding OpenTranscriptionCommand}"
-                        CommandParameter="{Binding}"
-                        Padding="12 0 12 0"
-                        Foreground="Black"
-                        FontWeight="Normal"
-                        Margin="8 4">
-                        <StackPanel Orientation="Horizontal"
-                                 Width="200">
-                            <materialDesign:PackIcon Kind="Transcribe"
-                                                 Padding="0"
-                                                 Margin="0"
-                                                 VerticalAlignment="Center">
-
-                            </materialDesign:PackIcon>
-                            <TextBlock VerticalAlignment="Center"
-                                   Margin="8 0 0 0">Transcribe</TextBlock>
-                        </StackPanel>
-                    </Button>
-                    <!--<Button Style="{StaticResource MaterialDesignFlatButton}"
-                        Padding="12 0 12 0"
-                        Foreground="Black"
-                        FontWeight="Normal"
-                        Margin="8 4">
-                        <StackPanel Orientation="Horizontal"
-                                 Width="200">
-                            <materialDesign:PackIcon Kind="Edit"
-                                                 Padding="0"
-                                                 Margin="0"
-                                                 VerticalAlignment="Center">
-
-                            </materialDesign:PackIcon>
-                            <TextBlock VerticalAlignment="Center"
-                                   Margin="8 0 0 0">Edit</TextBlock>
-                        </StackPanel>
-                    </Button>-->
-                </StackPanel>
-            </Grid>
-        </materialDesign:DrawerHost.LeftDrawerContent>
-
-        <materialDesign:DialogHost DialogContentUniformCornerRadius="20"
+    <materialDesign:DialogHost DialogContentUniformCornerRadius="20"
                                     DialogContent="{Binding Dialog, UpdateSourceTrigger=PropertyChanged}"
                                     IsOpen="{Binding Dialog, Converter={StaticResource NullToBooleanConverter}}"
                                     DialogTheme="Inherit"
@@ -82,54 +17,93 @@
                                     VerticalAlignment="Stretch">
 
 
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-                    <Button HorizontalAlignment="Left"
-                        VerticalAlignment="Top"
-                        Style="{StaticResource MaterialDesignFlatDarkButton}"
-                        Content="{materialDesign:PackIcon Kind=ArrowLeft, Size=16}"
-                        Command="{Binding OpenDrawerCommand}"
-                        CommandParameter="{Binding}"
-                        Height="20"
-                        Width="20"
-                        Padding="2"
-                        Margin="4"/>
-                    <Separator VerticalAlignment="Top"
+                <StackPanel Orientation="Horizontal"
+                                VerticalAlignment="Center">
+                    <Button     Style="{StaticResource MaterialDesignFlatButton}"
+                                Content="{materialDesign:PackIcon Kind=Translate, Size=18}"
+                                ToolTip="Translate"
+                                Width="26"
+                                Height="26"
+                                Padding="4"
+                                Margin="4 2"
+                                Command="{Binding OpenTranslationCommand}"
+                                CommandParameter="{Binding}"
+                                FontWeight="DemiBold">
+                    </Button>
+                    <Button     Style="{StaticResource MaterialDesignFlatButton}"
+                                Content="{materialDesign:PackIcon Kind=Typewriter, Size=18}"
+                                ToolTip="Transcribe"
+                                Width="26"
+                                Height="26"
+                                Padding="4"
+                                Margin="4 2"
+                                Command="{Binding OpenTranscriptionCommand}"
+                                CommandParameter="{Binding}"
+                                FontWeight="DemiBold">
+                    </Button>
+                    <Button     Style="{StaticResource MaterialDesignFlatButton}"
+                                Content="{materialDesign:PackIcon Kind=Gear, Size=18}"
+                                Foreground="#5e5e5e"
+                                ToolTip="Application settings"
+                                Width="26"
+                                Height="26"
+                                Padding="4"
+                                Margin="4 2"
+                                Command="{Binding OpenWhisperOptionsSetupCommand}"
+                                CommandParameter="{Binding}"
+                                FontWeight="DemiBold">
+                    </Button>
+                    <Button     Style="{StaticResource MaterialDesignFlatButton}"
+                                Content="{materialDesign:PackIcon Kind=Pen, Size=18}"
+                                Foreground="#5e5e5e"
+                                ToolTip="Whisper settings"
+                                Width="26"
+                                Height="26"
+                                Padding="4"
+                                Margin="4 2"
+                                Command="{Binding OpenWhisperOptionsSetupCommand}"
+                                CommandParameter="{Binding}"
+                                FontWeight="DemiBold">
+                    </Button>
+                </StackPanel>
+
+                <Separator VerticalAlignment="Top"
                            Grid.Row="1"
                            Height="2"
                            Style="{StaticResource MaterialDesignDarkSeparator}">
-                        <Separator.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform ScaleY="-1"/>
-                                <SkewTransform/>
-                                <RotateTransform/>
-                                <TranslateTransform/>
-                            </TransformGroup>
-                        </Separator.RenderTransform>
-                    </Separator>
-                </Grid>
-                <ContentControl Grid.Row="1"
+                    <Separator.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleY="-1"/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Separator.RenderTransform>
+                </Separator>
+            </Grid>
+            <ContentControl Grid.Row="1"
                                 Content="{Binding View, UpdateSourceTrigger=PropertyChanged}"/>
-                <materialDesign:Snackbar     MessageQueue="{Binding SnackbarMessage}"
+            <materialDesign:Snackbar     MessageQueue="{Binding SnackbarMessage}"
                                              Style="{Binding SnackbarStyle}"
                                              IsActive="{Binding IsSnackbarActive, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
                                              HorizontalAlignment="Center"
                                              VerticalAlignment="Bottom"
                                              Margin="16"
                                              Width="300">
-                    <materialDesign:SnackbarMessage>
-                        <TextBlock Text="{Binding SnackbarMessage, UpdateSourceTrigger=PropertyChanged}" Style="{Binding Foreground}"/>
-                    </materialDesign:SnackbarMessage>
-                </materialDesign:Snackbar>
-            </Grid>
-        </materialDesign:DialogHost>
-    </materialDesign:DrawerHost>
+                <materialDesign:SnackbarMessage>
+                    <TextBlock Text="{Binding SnackbarMessage, UpdateSourceTrigger=PropertyChanged}" Style="{Binding Foreground}"/>
+                </materialDesign:SnackbarMessage>
+            </materialDesign:Snackbar>
+        </Grid>
+    </materialDesign:DialogHost>
 </Window>

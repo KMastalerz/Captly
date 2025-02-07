@@ -1,7 +1,7 @@
 ﻿using captly.Models;
 using captly.ViewModels;
+using Newtonsoft.Json;
 using System.IO;
-using System.Text.Json;
 
 namespace captly.Services;
 
@@ -23,7 +23,7 @@ public class CacheService : ICacheService
 
         try
         {
-            return JsonSerializer.Deserialize<Cache>(cacheJson);
+            return JsonConvert.DeserializeObject<Cache>(cacheJson);
         }
         catch
         {
@@ -37,17 +37,13 @@ public class CacheService : ICacheService
         string cacheDirectory = Path.Combine(appDirectory, "Cache");
         string cacheFile = Path.Combine(cacheDirectory, "Cache.json");
 
-        var jsonOptions = new JsonSerializerOptions
-        {
-            WriteIndented = true
-        };
 
         if(!Directory.Exists(cacheDirectory))
         {
             Directory.CreateDirectory(cacheDirectory);
         }
 
-        await File.WriteAllTextAsync(cacheFile, JsonSerializer.Serialize(cache, jsonOptions));
+        await File.WriteAllTextAsync(cacheFile, JsonConvert.SerializeObject(cache, Formatting.Indented));
     }
 
     public async Task CasheTranslations(IEnumerable<TranslationViewModel> translations)
@@ -59,10 +55,10 @@ public class CacheService : ICacheService
             Name = t.Name,
             Path = t.Path,
             Status = t.Status,
+            Extension = t.Extension,
+            FileSize = t.FileSize,
             RequestCount = t.RequestCount,
             FailedRequestCount = t.FailedRequestCount,
-            InputTokenCount = t.InputTokenCount,
-            OutputTokenCount = t.OutputTokenCount,
             Progress = t.Progress,
             TranslationSetup = t.TranslationSetup,
         });
